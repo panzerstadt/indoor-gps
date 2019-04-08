@@ -1,0 +1,52 @@
+.sparks {
+  font-variant-ligatures: normal;
+}
+
+.bar-narrow {
+  font-family: Sparks-Bar-Medium;
+}
+.bar-medium {
+  font-family: Sparks-Bar-Medium;
+}
+.bar-wide {
+  font-family: Sparks-Bar-Wide;
+}
+.bar-extrawide {
+  font-family: Sparks-Bar-Wide;
+}
+
+.dot-extrasmall {
+  font-family: Sparks-Dot-Extrasmall;
+}
+.dot-small {
+  font-family: Sparks-Dot-Small;
+}
+.dot-medium {
+  font-family: Sparks-Dot-Medium;
+}
+.dot-large {
+  font-family: Sparks-Dot-Large;
+}
+.dot-extralarge {
+  font-family: Sparks-Dot-Extralarge;
+}
+
+.dotline-extrathin {
+  font-family: Sparks-Dotline-Extrathin;
+}
+.dotline-thin {
+  font-family: Sparks-Dotline-Thin;
+}
+.dotline-medium {
+  font-family: Sparks-Dotline-Medium;
+}
+.dotline-thick {
+  font-family: Sparks-Dotline-Thick;
+}
+.dotline-extrathick {
+  font-family: Sparks-Dotline-Extrathick;
+}
+
+.final-value {
+  color: #f00;
+}

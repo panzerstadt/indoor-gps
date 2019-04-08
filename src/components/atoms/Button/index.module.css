@@ -1,0 +1,42 @@
+.buttonDiv {
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 40px #00000018;
+
+  min-width: 350px;
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  transition: all 300ms ease-out;
+  outline: none;
+
+  min-height: 50px;
+  width: 100%;
+
+  padding: 15px;
+
+  border-radius: 5px;
+  border: none;
+}
+
+.buttonLeft {
+  composes: button;
+  border-radius: 5px 0 0 5px;
+}
+
+.buttonRight {
+  composes: button;
+  border-radius: 0 5px 5px 0;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}

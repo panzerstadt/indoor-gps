@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "label": "dog",
+      "latlng": {
+        "lat": 1451,
+        "lng": 1972
+      },
+      "text": "a small fluffy object."
+    },
+    {
+      "label": "chihuahua",
+      "latlng": {
+        "lat": 61.354,
+        "lng": 240.161
+      },
+      "text": "a very very small, not very fluffy object."
+    },
+    {
+      "label": "miniature schnauzer",
+      "latlng": {
+        "lat": 59.933,
+        "lng": 241.127
+      },
+      "text": "a very very small, very fluffy object."
+    },
+    {
+      "label": "corgy",
+      "latlng": {
+        "lat": 57.657,
+        "lng": 235.063
+      },
+      "text": "a tube-like rubbery object"
+    },
+    {
+      "label": "dinosaur",
+      "latlng": {
+        "lat": 60.88,
+        "lng": 235.766
+      },
+      "text": "an old dusty thing generally covered in dirt."
+    },
+    {
+      "label": "fly",
+      "latlng": {
+        "lat": 57.657,
+        "lng": 255.805
+      },
+      "text": "something not nice."
+    },
+    {
+      "label": "bird",
+      "latlng": {
+        "lat": 56.511,
+        "lng": 239.018
+      },
+      "text": "a large feathery object. makes a CAW CAW sound when poked."
+    },
+    {
+      "label": "apple",
+      "latlng": {
+        "lat": 56.559,
+        "lng": 246.752
+      },
+      "text": "a hidden piece of this was once found between a gap in tree's teeth."
+    }
+  ]
+}
