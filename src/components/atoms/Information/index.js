@@ -112,6 +112,7 @@ const FetchAndDisplay = ({ search }) => {
   };
 
   useEffect(() => {
+    // TODO: currently simplifying search
     doFetch(WIKI_URL(search.split(" ")[0]));
   }, [search]);
 

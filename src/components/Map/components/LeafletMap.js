@@ -77,6 +77,12 @@ const closestObjects = (point, appState, count = 3) => {
   return output;
 };
 
+const findObject = (name, appState) => {
+  const output = appState.dataset.filter(v => v.label === name)[0];
+
+  return { lat: output.x, lng: output.y };
+};
+
 const LeafletMap = props => {
   let nearby;
   const { height } = props;
@@ -96,7 +102,25 @@ const LeafletMap = props => {
   }, []);
 
   // CNN assisted geolocation
-  const handleUpdateLocation = e => {};
+  const { search } = appState;
+  useEffect(() => {
+    const handleUpdateLocation = () => {
+      console.log(search);
+
+      const updatedLabel = search;
+
+      const { lat, lng } = findObject(updatedLabel, appState);
+      setPoint([lat, lng]);
+
+      nearby = closestObjects([lat, lng], appState, 5);
+      setClosestList(nearby);
+    };
+
+    if (search !== "") {
+      handleUpdateLocation();
+    }
+  }, [search]);
+
   // manual geolocation
   const handleMapClick = e => {
     //alert("clicked! at " + e.latlng.lat + " " + e.latlng.lng);

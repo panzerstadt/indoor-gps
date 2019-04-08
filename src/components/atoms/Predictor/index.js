@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as tf from "@tensorflow/tfjs";
 
 import { useInterval } from "../../useHooks";
 import Information from "../Information";
+
+// context api
+import { MainContext } from "../../../App";
 
 const SCALE = 1;
 const RGB_SCALE = 0.02;
@@ -70,7 +73,8 @@ const Predictor = ({ videoRef, onPrediction }) => {
   );
 
   const [guesses, setGuesses] = useState([]);
-  const [search, setSearch] = useState("");
+  const [topGuess, setTopGuess] = useState("");
+  const appState = useContext(MainContext);
   const detect = async () => {
     if (videoRef) {
       let context;
@@ -114,8 +118,9 @@ const Predictor = ({ videoRef, onPrediction }) => {
       console.log(predictions.slice(0, 5));
 
       setGuesses([dinos.slice(0, 5)]);
-      setSearch(dinos[0]);
+      setTopGuess(dinos[0]);
       if (onPrediction) onPrediction(dinos[0]);
+      appState.setSearch(dinos[0]);
     }
   };
 
@@ -136,7 +141,7 @@ const Predictor = ({ videoRef, onPrediction }) => {
       <br />
       {/* {guesses} */}
       <div style={{ height: 100, overflowY: "scroll" }}>
-        <Information search={search} />
+        <Information search={topGuess} />
       </div>
     </div>
   );

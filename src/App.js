@@ -29,6 +29,7 @@ const App = props => {
   const [point, setPoint] = useState([972, 1982]);
   const [closestList, setClosestList] = useState({ pins: [], lbls: [] });
   const [photo, setPhoto] = useState("");
+  const [search, setSearch] = useState("");
 
   const label = "a dinosaur! RAWR";
 
@@ -59,7 +60,9 @@ const App = props => {
     photo: photo,
     setPhoto: setPhoto,
     label: label,
-    dataset: data
+    dataset: data,
+    search: search,
+    setSearch: setSearch
   };
 
   return (
