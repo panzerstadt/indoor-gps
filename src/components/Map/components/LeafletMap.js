@@ -135,7 +135,7 @@ const LeafletMap = props => {
   const localMapBounds = MED_MAP_BOUNDS;
   const localMap = (
     <Map
-      center={localPosition}
+      center={point}
       zoom={1}
       minZoom={-2}
       maxZoom={2}
