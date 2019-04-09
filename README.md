@@ -1,6 +1,6 @@
 # Indoor GPS
 
-'GPS' your way around the interior of the national museum's dinosaur exhibit! the app sees what you are looking at and approximates your location within the exhibit.
+'GPS' your way around the interior of Tokyo's National Museum of Nature and Science's dinosaur exhibit! the app sees what you are looking at and approximates your location within the exhibit.
 
 deployment site (frontend): here
 sister site (CNN predictor): https://github.com/yueying-teng/indoor_gps
