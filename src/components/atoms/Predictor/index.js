@@ -9,15 +9,29 @@ import { MainContext } from "../../../App";
 
 const SCALE = 1;
 const RGB_SCALE = 0.02;
-const MODEL = "assets/models/indoor-gps/model.json";
-const CLASSES = "assets/models/indoor-gps/class_names.txt";
+const MODEL = "./assets/models/indoor-gps/model.json";
+const CLASSES = "./assets/models/indoor-gps/class_names.txt";
 
-const loadModel = async () => {
+const loadModel = async ({ onProgress }) => {
+  // check for model in localstorage
+  try {
+    const savedModel = await tf.loadLayersModel(
+      "indexeddb://indoor-gps-model",
+      { onProgress: onProgress }
+    );
+    onProgress && onProgress(1);
+    return savedModel;
+  } catch (e) {
+    console.log(e);
+    console.log(
+      "INFO: model has to be places in public folder to be accessible."
+    );
+    const model = await tf.loadLayersModel(MODEL, { onProgress: onProgress });
+    await model.save("indexeddb://indoor-gps-model");
+    return model;
+  }
+
   // in public folder
-  console.log(
-    "INFO: model has to be places in public folder to be accessible."
-  );
-  return await tf.loadLayersModel(MODEL);
 };
 
 const preprocess = imgData => {
@@ -42,18 +56,26 @@ const preprocess = imgData => {
   });
 };
 
-const Predictor = ({ videoRef, onPrediction }) => {
+const Predictor = ({ videoRef, onPrediction, onProgress }) => {
   const [predictor, setPredictor] = useState();
   const [classes, setClasses] = useState();
+  const [progress, setProgress] = useState(0);
+  const handleProgress = v => {
+    console.log(v);
+    setProgress(v);
+    if (onProgress) onProgress(v);
+  };
   useEffect(() => {
     const load = async () => {
-      const model = await loadModel();
+      const model = await loadModel({ onProgress: handleProgress });
+      //console.log("model: ", model);
       const classes = await fetch(CLASSES)
         .then(r => r.text())
         .then(s => {
           const allLines = s.split(/\r\n|\n/);
           return allLines.filter(v => v.length > 1);
         });
+      //console.log("classes: ", classes);
 
       setPredictor(model);
       setClasses(classes);
@@ -130,14 +152,22 @@ const Predictor = ({ videoRef, onPrediction }) => {
     return outp;
   };
 
+  const readyStateClr = () => {
+    if (progress === 1 && isDetecting) return "red";
+    else if (progress === 1 && !isDetecting) return "#efefef";
+    else return "grey";
+  };
+
   return (
     <div style={{ width: "100%" }}>
       <button
-        style={{ backgroundColor: isDetecting ? "red" : "lightgrey" }}
-        onClick={() => setIsDetecting(!isDetecting)}
+        style={{ backgroundColor: readyStateClr(), textAlign: "center" }}
+        onClick={() => (progress === 1 ? setIsDetecting(!isDetecting) : null)}
       >
         toggle detection
       </button>
+      <br />
+      {progress === 1 ? "" : `model loading: ${(progress * 100).toFixed(2)}%`}
       <br />
       {/* {guesses} */}
       <div style={{ height: 100, overflowY: "scroll" }}>

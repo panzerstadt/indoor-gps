@@ -95,8 +95,8 @@ const DiscoverCard = () => {
   return (
     <div className={styles.discoverDiv}>
       <Camera onTakePhoto={onTakePhoto} onRef={setVideoRef} />
-      <br />
-      <p>prediction: {pred}</p>
+
+      <code>prediction: {pred}</code>
       <Predictor videoRef={videoRef} onPrediction={setPred} />
     </div>
   );
