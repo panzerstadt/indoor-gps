@@ -65,24 +65,22 @@ const closestObjects = (point, appState, count = 3) => {
   const dataPos = appState.dataset.map(v => [v.x, v.y]);
   const closest = Nearby(point, dataPos);
   const closestIndices = closest.map(v => v.index);
-
-  console.log("closest indices");
-  console.log(closest.slice(0, count));
-  console.log(closestIndices.slice(0, count));
-
   const topN = closestIndices.slice(0, count);
 
-  const closestObjs = appState.dataset.filter(
-    (v, i) => topN.filter(w => w === i).length > 0
-  );
+  // TODO: holy shit i shall leave this here
+  // to remind mysel of how stupidly convoluted
+  // i write this previously
+  // -----------------------------------------
+  // const closestObjs = appState.dataset.filter(
+  //   (v, i) => topN.filter(w => w === i).length > 0
+  // );
 
+  const closestObjs = topN.map(index => appState.dataset[index]);
   const closestPins = closestObjs.map(v => [v.x, v.y]);
   const closestLbls = closestObjs.map(v => v.label);
 
   const output = { pins: closestPins, lbls: closestLbls };
 
-  console.log("closest objects to: ", point);
-  console.log("are: ", output);
   return output;
 };
 
