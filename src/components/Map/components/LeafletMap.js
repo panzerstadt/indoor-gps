@@ -63,25 +63,41 @@ const Markers = ({ points, labels, icons, alwaysOpenPopup }) => {
 const closestObjects = (point, appState, count = 3) => {
   // TODO: CLOSEST OBJECTS SEEM TO BE CALCULATING THE WRONG DISTANCES
   const dataPos = appState.dataset.map(v => [v.x, v.y]);
-  const closestIndices = Nearby(point, dataPos);
+  const closest = Nearby(point, dataPos);
+  const closestIndices = closest.map(v => v.index);
+
+  console.log("closest indices");
+  console.log(closest.slice(0, count));
+  console.log(closestIndices.slice(0, count));
 
   const topN = closestIndices.slice(0, count);
 
-  const closestObjects = appState.dataset.filter(
+  const closestObjs = appState.dataset.filter(
     (v, i) => topN.filter(w => w === i).length > 0
   );
 
-  const closestPins = closestObjects.map(v => [v.x, v.y]);
-  const closestLbls = closestObjects.map(v => v.label);
+  const closestPins = closestObjs.map(v => [v.x, v.y]);
+  const closestLbls = closestObjs.map(v => v.label);
 
   const output = { pins: closestPins, lbls: closestLbls };
+
+  console.log("closest objects to: ", point);
+  console.log("are: ", output);
   return output;
 };
 
-const findObject = (name, appState) => {
+const findLocationFromObject = (name, appState) => {
   const output = appState.dataset.filter(v => v.label === name)[0];
 
   return { lat: output.x, lng: output.y };
+};
+
+const findObjectFromLocation = (loc, appState) => {
+  console.log(loc);
+  console.log(appState.dataset);
+  const locs = appState.dataset.map(v => [parseInt(v.x), parseInt(v.y)]);
+  const t = Nearby(loc, locs);
+  console.log(t);
 };
 
 const LeafletMap = props => {
@@ -109,38 +125,41 @@ const LeafletMap = props => {
   }, [pins, lbls]);
 
   // CNN assisted geolocation
-  const { search } = appState;
+  const [mainLbl, setMainLbl] = useState("tap anywhere!");
   useEffect(() => {
     const handleUpdateLocation = () => {
-      console.log("searching for: ", search);
+      const updatedLabel = appState.search;
 
-      const updatedLabel = search;
-
-      const { lat, lng } = findObject(updatedLabel, appState);
+      const { lat, lng } = findLocationFromObject(updatedLabel, appState);
       setPoint([lat, lng]);
 
       nearby = closestObjects([lat, lng], appState, 5);
       setClosestList(nearby);
+
+      setMainLbl(updatedLabel);
     };
 
-    if (search !== "") {
+    if (appState.search !== "") {
       handleUpdateLocation();
     }
-  }, [search]);
+  }, [appState.search]);
 
   // manual geolocation
   const handleMapClick = e => {
     //alert("clicked! at " + e.latlng.lat + " " + e.latlng.lng);
-    setPoint([e.latlng.lat, e.latlng.lng]);
+    const pt = [e.latlng.lat, e.latlng.lng];
+    setPoint(pt);
 
     nearby = closestObjects([e.latlng.lat, e.latlng.lng], appState, 5);
     setClosestList(nearby);
+
+    setMainLbl("see what's nearby!");
   };
 
   // national history museum map
   const localPosition = [972, 1982]; // north, east
   const localMapBounds = MED_MAP_BOUNDS;
-  const localMap = (
+  return (
     <Map
       center={point}
       zoom={1}
@@ -151,17 +170,20 @@ const LeafletMap = props => {
       crs={L.CRS.Simple}
     >
       <ImageOverlay alt="local map" url={PNG_MAP} bounds={localMapBounds} />
+
+      {/* main marker */}
       <Markers
         points={[point]}
-        labels={[`${Math.round(point[0])} ${Math.round(point[1])}`]}
+        labels={[mainLbl]}
+        //labels={[`${Math.round(point[0])} ${Math.round(point[1])}`]}
         icons={[MainIcon("arrow", 40)]}
         alwaysOpenPopup
       />
+
+      {/* nearby markers */}
       <Markers points={pins} labels={lbls} />
     </Map>
   );
-
-  return localMap;
 };
 
 export default LeafletMap;

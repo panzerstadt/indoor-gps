@@ -25,13 +25,13 @@ const ExploreCard = () => {
     slidesToScroll: 3
   };
 
-  const { closestList } = appState;
-  const nearestLbls = closestList.lbls.length > 0 ? closestList.lbls : [];
-
-  const [infoCards, setInfoCards] = useState([]);
-  const handleClick = e => {
-    console.log(e);
-  };
+  const [nearestLbls, setNearestLbls] = useState([]);
+  useEffect(() => {
+    if (appState.closestList.lbls.length > 0) {
+      setNearestLbls(appState.closestList.lbls);
+      console.log(appState.closestList.lbls);
+    }
+  }, [appState.closestList]);
 
   return (
     <div className={styles.exploreDiv}>
@@ -48,18 +48,14 @@ const ExploreCard = () => {
       <Carousel settings={carouselSettings} className={styles.carouselMain}>
         {nearestLbls.map((v, i) => (
           <div key={i} className={styles.carouselDiv}>
-            <div onClick={handleClick} className={styles.carouselContainer}>
-              <h5 className={styles.carouselTitle}>{v}</h5>
-              <div className={styles.carouselDesc}>
-                <div className={styles.descGradient}> </div>
-                <Information search={v} showImage={true} />
-              </div>
+            <div className={styles.carouselContainer}>
+              <Information search={v} showImage={true} />
             </div>
           </div>
         ))}
       </Carousel>
 
-      <h4>Other Things to See</h4>
+      <h4>Try looking for these dinosaurs!</h4>
       <Carousel settings={carouselSettings}>
         {appState.dataset.map((v, i) => (
           <div
@@ -120,10 +116,8 @@ const DiscoverCard = () => {
   };
 
   useEffect(() => {
-    console.log(videoRef);
+    //console.log(videoRef);
   }, [videoRef]);
-
-  console.log(ready);
 
   const AnimatedLogo = () => {
     return (

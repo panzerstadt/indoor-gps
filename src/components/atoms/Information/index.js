@@ -129,14 +129,14 @@ const WikiSearch = ({ search, onSuccess, ...props }) => {
       >
         <LoadingOrEror />
       </div>
-      <p>{data && data[2]}</p>
+      {data && data[2]}
     </div>
   );
 };
 
-const WikiImage = ({ search, onSuccess, ...props }) => {
+const WikiImage = ({ search, onSuccess, thumbnailSize = 300, ...props }) => {
   const WIKI_IMG_URL = query =>
-    `https://en.wikipedia.org/w/api.php?action=query&titles=${query}&prop=pageimages&origin=*&format=json&pithumbsize=100`;
+    `https://en.wikipedia.org/w/api.php?action=query&titles=${query}&prop=pageimages&origin=*&format=json&pithumbsize=${thumbnailSize}`;
 
   const { data, isLoading, error, doFetch } = useFetch();
 
@@ -152,41 +152,28 @@ const WikiImage = ({ search, onSuccess, ...props }) => {
     }
   };
 
+  // effect for fetching data
   useEffect(() => {
     if (search) {
       doFetch(WIKI_IMG_URL(search));
     }
   }, [search]);
 
+  // effect for replacing img src
+  const [src, setSrc] = useState("#");
   useEffect(() => {
-    console.log("data in useEffect");
-    console.log(data);
-    console.log(performance.now());
-    console.log("isUndefined: ", typeof data !== "undefined");
-    console.log(data && data.query.pages);
-
     if (data) {
-      console.log("data in useEffect's if statement");
-      console.log(data);
-      console.log(performance.now());
-      console.log("isUndefined: ", typeof data !== "undefined");
-      console.log(data.query.pages);
-
       const response = data.query.pages;
-
-      console.log(data);
       const k = Object.keys(response)[0];
-      console.log(k);
-
-      const data = response[k];
+      const d = response[k];
       let out;
-      if (!data.thumbnail) {
-        out = "#";
+      if (!d.thumbnail) {
+        //out = "#";
+        // replacement image?
       } else {
-        out = data.thumbnail.source;
+        setSrc(d.thumbnail.source);
+        //out = data.thumbnail.source;
       }
-
-      console.log(out);
     }
   }, [data]);
 
@@ -194,29 +181,41 @@ const WikiImage = ({ search, onSuccess, ...props }) => {
     <div {...props}>
       <div
         className={styles.loadingOrError}
-        style={{ display: !isLoading && !error ? "none" : "block" }}
+        style={{
+          display: !isLoading && !error ? "none" : "flex"
+        }}
       >
         <LoadingOrEror />
       </div>
-      <img src="#" height={300} alt="img" />
+      <img className={styles.img} src={src} height={100} alt="img" />
     </div>
   );
 };
 
-const InformationCard = ({ search, showImage = false }) => {
+const InformationCard = ({ search, showImage = false, onClick }) => {
   const dinoSearch = search.split(" ")[0];
   const [wikiPage, setWikiPage] = useState("");
+  const [url, setUrl] = useState("#");
 
   const handleSearchSuccess = data => {
     const wikiPageTitle = data && data[1] && data[1][0];
     setWikiPage(wikiPageTitle);
+    setUrl(data && data[3][0]);
   };
 
   return (
-    <div>
+    <a className={styles.infoCard} href={url} target="_blank">
       {showImage && <WikiImage search={wikiPage} />}
-      <WikiSearch search={dinoSearch} onSuccess={handleSearchSuccess} />
-    </div>
+      <div className={styles.infoContainer}>
+        <h5 className={styles.title}>{search}</h5>
+        <div className={styles.gradient}> </div>
+        <WikiSearch
+          className={styles.text}
+          search={dinoSearch}
+          onSuccess={handleSearchSuccess}
+        />
+      </div>
+    </a>
   );
 };
 

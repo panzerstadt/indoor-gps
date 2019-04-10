@@ -15,6 +15,9 @@ export const Nearby = (first, others) => {
     return { index: i, value: dist };
   });
 
-  output.sort((x, y) => (x.value > y.value ? 1 : x.value === y.value ? 0 : -1));
+  output.sort((x, y) => (x.value > y.value ? 1 : -1));
+
+  return output;
+
   return output.map(v => v.index);
 };

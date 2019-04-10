@@ -36,16 +36,22 @@
   text-align: left;
   outline: none;
 
-  height: 150px;
+  height: 200px;
   overflow: visible;
 }
 
+/* card styling */
 .carouselContainer {
-  margin: 10px 5px 0 5px;
-  padding: 5px;
+  margin: 10px 15px 10px 5px;
+  padding: 0;
   border-radius: 8px;
 
   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.075);
+  overflow: hidden;
+}
+
+.carouselContainer:hover {
+  box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.123);
 }
 
 .carouselTitle {

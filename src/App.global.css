@@ -2,3 +2,18 @@
   width: 0px; /* remove scrollbar space */
   background: transparent; /* optional: just make scrollbar invisible */
 }
+
+* {
+  font-family: "Heebo", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #0060b6;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00a0c6;
+  text-decoration: none;
+  cursor: pointer;
+}
