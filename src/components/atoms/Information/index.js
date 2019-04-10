@@ -14,9 +14,6 @@ import axios from "axios";
 
 import styles from "./index.module.css";
 
-const WIKI_URL = query =>
-  `https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}&format=json`;
-
 // grouped state
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
@@ -26,29 +23,29 @@ const dataFetchReducer = (state, action) => {
         isLoading: true,
         error: ""
       };
+      break;
     case "FETCH_SUCCESS":
       return {
         ...state,
         isLoading: false,
         data: action.payload
       };
+      break;
     case "FETCH_FAILURE":
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
+      break;
     default:
       throw new Error("dunno what to do with this condition");
   }
 };
 
-const useFetch = (initialUrl, initialData) => {
-  const INIT = { hits: [] };
-  const [data, setData] = useState(initialData || INIT);
-  const [url, setUrl] = useState(
-    initialUrl || "http://hn.algolia.com/api/v1/search?query=redux"
-  );
+export const useFetch = (initialUrl, initialData) => {
+  const [data, setData] = useState(initialData || null);
+  const [url, setUrl] = useState(initialUrl);
 
   const [state, dispatch] = useReducer(dataFetchReducer, {
     // dataFetchReducer is the action
@@ -76,7 +73,9 @@ const useFetch = (initialUrl, initialData) => {
       }
     };
 
-    fetchData();
+    if (url) {
+      fetchData();
+    }
 
     return () => {
       // if it unmounts, this returns true
@@ -92,12 +91,11 @@ const useFetch = (initialUrl, initialData) => {
   return { ...state, doFetch };
 };
 
-const FetchAndDisplay = ({ search }) => {
-  const [query, setQuery] = useState("redux");
-  const { data, isLoading, error, doFetch } = useFetch(
-    "https://hn.algolia.com/api/v1/search?query=redux",
-    { hits: [] }
-  );
+const WikiSearch = ({ search, onSuccess, ...props }) => {
+  const WIKI_URL = query =>
+    `https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}&format=json`;
+
+  const { data, isLoading, error, doFetch } = useFetch();
 
   const LoadingOrEror = () => {
     if (!isLoading && !error) {
@@ -112,57 +110,114 @@ const FetchAndDisplay = ({ search }) => {
   };
 
   useEffect(() => {
-    // TODO: currently simplifying search
-    doFetch(WIKI_URL(search.split(" ")[0]));
+    doFetch(WIKI_URL(search));
   }, [search]);
 
-  return (
-    <>
-      <div className={styles.loadingOrError}>
-        <LoadingOrEror />
-      </div>
+  useEffect(() => {
+    if (data) {
+      if (onSuccess) onSuccess(data);
+    }
+  }, [data]);
 
-      <p>{data[2]}</p>
-
-      {/* <ul>{JSON.stringify(data)}</ul> */}
-    </>
-  );
+  //console.log(data && data[1] && data[1][0]);
 
   return (
-    <>
-      <form
-        style={{ width: "100%" }}
-        onSubmit={e => {
-          e.preventDefault();
-          doFetch(WIKI_URL(query));
-        }}
+    <div {...props}>
+      <div
+        className={styles.loadingOrError}
+        style={{ display: !isLoading && !error ? "none" : "block" }}
       >
-        <input
-          className={styles.input}
-          type="text"
-          value={search || query}
-          onChange={e => setQuery(e.target.value)}
-        />
-        <button className={styles.submit} type="Submit">
-          Search
-        </button>
-      </form>
-
-      <div className={styles.loadingOrError}>
         <LoadingOrEror />
       </div>
-
-      <ul>
-        {data.hits.map(item => (
-          <li key={item.objectID}>
-            <a href={item.url} target="_blank" rel="noopener noreferrer">
-              {item.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </>
+      <p>{data && data[2]}</p>
+    </div>
   );
 };
 
-export default FetchAndDisplay;
+const WikiImage = ({ search, onSuccess, ...props }) => {
+  const WIKI_IMG_URL = query =>
+    `https://en.wikipedia.org/w/api.php?action=query&titles=${query}&prop=pageimages&origin=*&format=json&pithumbsize=100`;
+
+  const { data, isLoading, error, doFetch } = useFetch();
+
+  const LoadingOrEror = () => {
+    if (!isLoading && !error) {
+      return null;
+    } else if (isLoading && !error) {
+      return <div>Loading...</div>;
+    } else if (error) {
+      return <div style={{ color: "red" }}>{error}</div>;
+    } else {
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (search) {
+      doFetch(WIKI_IMG_URL(search));
+    }
+  }, [search]);
+
+  useEffect(() => {
+    console.log("data in useEffect");
+    console.log(data);
+    console.log(performance.now());
+    console.log("isUndefined: ", typeof data !== "undefined");
+    console.log(data && data.query.pages);
+
+    if (data) {
+      console.log("data in useEffect's if statement");
+      console.log(data);
+      console.log(performance.now());
+      console.log("isUndefined: ", typeof data !== "undefined");
+      console.log(data.query.pages);
+
+      const response = data.query.pages;
+
+      console.log(data);
+      const k = Object.keys(response)[0];
+      console.log(k);
+
+      const data = response[k];
+      let out;
+      if (!data.thumbnail) {
+        out = "#";
+      } else {
+        out = data.thumbnail.source;
+      }
+
+      console.log(out);
+    }
+  }, [data]);
+
+  return (
+    <div {...props}>
+      <div
+        className={styles.loadingOrError}
+        style={{ display: !isLoading && !error ? "none" : "block" }}
+      >
+        <LoadingOrEror />
+      </div>
+      <img src="#" height={300} alt="img" />
+    </div>
+  );
+};
+
+const InformationCard = ({ search, showImage = false }) => {
+  const dinoSearch = search.split(" ")[0];
+  const [wikiPage, setWikiPage] = useState("");
+
+  const handleSearchSuccess = data => {
+    const wikiPageTitle = data && data[1] && data[1][0];
+    setWikiPage(wikiPageTitle);
+  };
+
+  return (
+    <div>
+      {showImage && <WikiImage search={wikiPage} />}
+      <WikiSearch search={dinoSearch} onSuccess={handleSearchSuccess} />
+    </div>
+  );
+};
+
+export default InformationCard;

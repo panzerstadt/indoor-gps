@@ -24,16 +24,53 @@
   bottom: 15px;
 }
 
+.carouselMain {
+}
+
 .carouselDiv {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  text-align: center;
+  text-align: left;
   outline: none;
 
-  height: 100px;
+  height: 150px;
+  overflow: visible;
+}
+
+.carouselContainer {
+  margin: 10px 5px 0 5px;
+  padding: 5px;
+  border-radius: 8px;
+
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.075);
+}
+
+.carouselTitle {
+  margin: 0;
+}
+
+.carouselDesc {
+  position: relative;
+  font-size: 12px;
+  height: 90px;
+
+  overflow: hidden;
+}
+
+.descGradient {
+  position: absolute;
+  bottom: 0;
+
+  height: 20px;
+  width: 100%;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.801)
+  );
+  z-index: 1000;
 }
 
 .discoverDiv {
@@ -42,4 +79,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.cameraContainer {
+  transition: border 500ms ease;
+  border-radius: 999px;
+}
+
+.animatedLogo {
+  animation: spin-animation infinite 3s ease-in-out;
+}
+
+@keyframes spin-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

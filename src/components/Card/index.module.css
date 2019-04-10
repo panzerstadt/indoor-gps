@@ -19,6 +19,8 @@
   box-shadow: 0 0 40px #0000001c;
 
   padding: 10px;
+
+  transition: opacity 300ms ease;
 }
 
 @media (min-width: 600px) {

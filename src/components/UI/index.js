@@ -7,9 +7,14 @@ import Camera from "../atoms/Camera";
 import Predictor from "../atoms/Predictor";
 import Button from "../atoms/Button";
 import Carousel from "../atoms/Carousel";
+import Information, { useFetch } from "../atoms/Information";
 
 import { MainContext } from "../../App";
 import { useWiki } from "../useHooks";
+
+const GREEN = "#3AB795";
+const YELLOW = "#FFC532";
+const GREY = "#BECEC6";
 
 const ExploreCard = () => {
   const appState = useContext(MainContext);
@@ -20,19 +25,36 @@ const ExploreCard = () => {
     slidesToScroll: 3
   };
 
-  const nearestLbls =
-    appState.closestList.lbls.length > 0 ? appState.closestList.lbls : [];
+  const { closestList } = appState;
+  const nearestLbls = closestList.lbls.length > 0 ? closestList.lbls : [];
+
+  const [infoCards, setInfoCards] = useState([]);
+  const handleClick = e => {
+    console.log(e);
+  };
 
   return (
     <div className={styles.exploreDiv}>
       <h3>Welcome to the museum!</h3>
 
       <h4>What's Nearby </h4>
-      <small>tap on the map to see what's nearby!</small>
-      <Carousel settings={carouselSettings}>
+      <p
+        style={{
+          display: nearestLbls.length > 0 ? "none" : "block"
+        }}
+      >
+        tap on the map to see what's nearby!
+      </p>
+      <Carousel settings={carouselSettings} className={styles.carouselMain}>
         {nearestLbls.map((v, i) => (
           <div key={i} className={styles.carouselDiv}>
-            <h5>{v}</h5>
+            <div onClick={handleClick} className={styles.carouselContainer}>
+              <h5 className={styles.carouselTitle}>{v}</h5>
+              <div className={styles.carouselDesc}>
+                <div className={styles.descGradient}> </div>
+                <Information search={v} showImage={true} />
+              </div>
+            </div>
           </div>
         ))}
       </Carousel>
@@ -40,8 +62,15 @@ const ExploreCard = () => {
       <h4>Other Things to See</h4>
       <Carousel settings={carouselSettings}>
         {appState.dataset.map((v, i) => (
-          <div key={i} className={styles.carouselDiv}>
-            <h5>{v.label}</h5>
+          <div
+            key={i}
+            className={styles.carouselDiv}
+            className={styles.carouselMain}
+          >
+            <div className={styles.carouselContainer}>
+              <img src="#" alt="dino" height={100} />
+              <h5 className={styles.carouselTitle}>{v.label}</h5>
+            </div>
           </div>
         ))}
       </Carousel>
@@ -77,6 +106,8 @@ const ExploreCard = () => {
 const DiscoverCard = () => {
   const [pred, setPred] = useState("");
   const [videoRef, setVideoRef] = useState();
+  const [ready, setReady] = useState(false);
+  const [triggerPrediction, setTriggerPrediction] = useState(false);
 
   const onTakePhoto = dataURI => {
     console.log("ontake photo!");
@@ -92,12 +123,41 @@ const DiscoverCard = () => {
     console.log(videoRef);
   }, [videoRef]);
 
+  console.log(ready);
+
+  const AnimatedLogo = () => {
+    return (
+      <img className={styles.animatedLogo} src="#" height={50} alt="find" />
+    );
+  };
+
+  const animatedBorder = (px = 10) => {
+    if (ready && !triggerPrediction) return `${px}px solid ${GREEN}`;
+    else if (ready && triggerPrediction) return `${px}px solid ${YELLOW}`;
+    else return `${px}px solid ${GREY}`;
+  };
+
   return (
     <div className={styles.discoverDiv}>
-      <Camera onTakePhoto={onTakePhoto} onRef={setVideoRef} />
+      <div
+        onClick={() => setTriggerPrediction(true)}
+        className={styles.cameraContainer}
+        style={{ border: animatedBorder() }}
+      >
+        <Camera onTakePhoto={onTakePhoto} onRef={setVideoRef} />
+      </div>
+      {/* <AnimatedLogo /> */}
 
       <code>prediction: {pred}</code>
-      <Predictor videoRef={videoRef} onPrediction={setPred} />
+      <Predictor
+        videoRef={videoRef}
+        onTrigger={triggerPrediction}
+        onSuccess={p => {
+          setPred(p);
+          setTriggerPrediction(false);
+        }}
+        onLoaded={setReady}
+      />
     </div>
   );
 };
@@ -111,9 +171,17 @@ const Buttons = ({ inputs, onSubmit }) => {
 };
 
 const UI = () => {
-  const [currentPage, setCurrentPage] = useState("📷");
-
   const pages = ["explore 🔍", "📷"];
+  const appState = useContext(MainContext);
+  const [currentPage, setCurrentPage] = useState(pages[0]);
+
+  const handlePageTransition = () => {
+    // TODO: smooth slide out/in/fade transition
+  };
+
+  useEffect(() => {
+    setCurrentPage(pages[0]);
+  }, [appState.search]);
 
   if (currentPage === pages[0]) {
     return (

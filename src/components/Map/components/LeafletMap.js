@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Map, Marker, Popup, TileLayer, ImageOverlay } from "react-leaflet";
 import L from "leaflet";
 
@@ -61,6 +61,7 @@ const Markers = ({ points, labels, icons, alwaysOpenPopup }) => {
 };
 
 const closestObjects = (point, appState, count = 3) => {
+  // TODO: CLOSEST OBJECTS SEEM TO BE CALCULATING THE WRONG DISTANCES
   const dataPos = appState.dataset.map(v => [v.x, v.y]);
   const closestIndices = Nearby(point, dataPos);
 
@@ -89,23 +90,29 @@ const LeafletMap = props => {
 
   const appState = useContext(MainContext);
 
-  let { point, setPoint } = appState;
-  let { setClosestList } = appState;
+  const { point, setPoint } = appState;
+  const { setClosestList } = appState;
 
   // markers
   // assumes one point as input
-  const { pins, lbls } = closestObjects(point, appState, 5);
+  const [pins, setPins] = useState([]);
+  const [lbls, setLbls] = useState([]);
+  useEffect(() => {
+    const { pins, lbls } = closestObjects(point, appState, 5);
+    setPins(pins);
+    setLbls(lbls);
+  }, [point]);
 
   // didmount
   useEffect(() => {
     setClosestList({ pins, lbls });
-  }, []);
+  }, [pins, lbls]);
 
   // CNN assisted geolocation
   const { search } = appState;
   useEffect(() => {
     const handleUpdateLocation = () => {
-      console.log(search);
+      console.log("searching for: ", search);
 
       const updatedLabel = search;
 

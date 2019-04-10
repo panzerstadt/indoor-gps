@@ -56,7 +56,13 @@ const preprocess = imgData => {
   });
 };
 
-const Predictor = ({ videoRef, onPrediction, onProgress }) => {
+const Predictor = ({
+  videoRef,
+  onProgress,
+  onLoaded,
+  onSuccess,
+  onTrigger
+}) => {
   const [predictor, setPredictor] = useState();
   const [classes, setClasses] = useState();
   const [progress, setProgress] = useState(0);
@@ -79,6 +85,7 @@ const Predictor = ({ videoRef, onPrediction, onProgress }) => {
 
       setPredictor(model);
       setClasses(classes);
+      if (onLoaded) onLoaded(true);
     };
 
     load();
@@ -86,7 +93,7 @@ const Predictor = ({ videoRef, onPrediction, onProgress }) => {
 
   // the thing that runs stuff along on video stream
   const [isDetecting, setIsDetecting] = useState(false);
-  const [detectionDelay, setDetectionDelay] = useState(500);
+  const [detectionDelay, setDetectionDelay] = useState(300);
   useInterval(
     () => {
       detect();
@@ -119,32 +126,56 @@ const Predictor = ({ videoRef, onPrediction, onProgress }) => {
         x.value > y.value ? 1 : x.value === y.value ? 0 : -1
       );
 
-      //console.log("sorted predictions");
-      //console.log(predictions.slice(0, 10));
-
       predictions = predictions.reverse();
 
+      let dinos = predictions.map(v => ({
+        label: getClassNames([v.index])[0],
+        score: v.value
+      }));
+
+      const s = dinos[0].score;
+
+      if (s > 0.5) {
+        const top5 = dinos.slice(0, 5).map(v => v.label);
+        const top = dinos[0].label;
+
+        // setstate
+        setGuesses([top5]);
+        setTopGuess(top);
+
+        // send to parent
+        if (onSuccess) onSuccess(top);
+
+        // send to context
+        setTimeout(() => {
+          appState.setSearch(top);
+        }, 1000);
+
+        // end detection loop
+        setIsDetecting(false);
+      }
+
+      // debug
+      //console.log("sorted predictions");
+      //console.log(predictions.slice(0, 10));
       //console.log("reverse sorted predictions");
       //console.log(predictions.slice(0, 10));
 
-      let classes = predictions.map(
-        v => getClassNames([v.index])[0] + ` (${v.index + 1})`
-      );
-
-      let dinos = predictions.map(v => getClassNames([v.index])[0]);
-
+      // let classes = predictions.map(
+      //   v => getClassNames([v.index])[0] + ` (${v.index + 1})`
+      // );
       //console.log("top 5");
       //console.log(classes.slice(0, 5));
       //console.log("top 1");
       //console.log(classes[0]);
-      console.log(predictions.slice(0, 5));
-
-      setGuesses([dinos.slice(0, 5)]);
-      setTopGuess(dinos[0]);
-      if (onPrediction) onPrediction(dinos[0]);
-      appState.setSearch(dinos[0]);
+      console.log(dinos.slice(0, 5));
     }
   };
+  useEffect(() => {
+    if (onTrigger) {
+      setIsDetecting(true);
+    }
+  }, [onTrigger]);
 
   const getClassNames = indices => {
     var outp = [];
@@ -160,19 +191,14 @@ const Predictor = ({ videoRef, onPrediction, onProgress }) => {
 
   return (
     <div style={{ width: "100%" }}>
-      <button
+      {/* <button
         style={{ backgroundColor: readyStateClr(), textAlign: "center" }}
         onClick={() => (progress === 1 ? setIsDetecting(!isDetecting) : null)}
       >
         toggle detection
       </button>
-      <br />
+      <br /> */}
       {progress === 1 ? "" : `model loading: ${(progress * 100).toFixed(2)}%`}
-      <br />
-      {/* {guesses} */}
-      <div style={{ height: 100, overflowY: "scroll" }}>
-        <Information search={topGuess} />
-      </div>
     </div>
   );
 };

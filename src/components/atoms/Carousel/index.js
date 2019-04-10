@@ -57,9 +57,11 @@ export default class Carousel extends Component {
 
   render() {
     return (
-      <Slider ref={this.ref} {...this.props.settings}>
-        {this.props.children}
-      </Slider>
+      <div className={this.props.className}>
+        <Slider ref={this.ref} {...this.props.settings}>
+          {this.props.children}
+        </Slider>
+      </div>
     );
   }
 }
