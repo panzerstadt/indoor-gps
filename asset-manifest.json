@@ -1,7 +1,7 @@
 {
-  "main.css": "https://panzerstadt.github.io/indoor-gps/static/css/main.f6f7a6e7.chunk.css",
-  "main.js": "https://panzerstadt.github.io/indoor-gps/static/js/main.76c33444.chunk.js",
-  "main.js.map": "https://panzerstadt.github.io/indoor-gps/static/js/main.76c33444.chunk.js.map",
+  "main.css": "https://panzerstadt.github.io/indoor-gps/static/css/main.44c9bbdc.chunk.css",
+  "main.js": "https://panzerstadt.github.io/indoor-gps/static/js/main.2279321a.chunk.js",
+  "main.js.map": "https://panzerstadt.github.io/indoor-gps/static/js/main.2279321a.chunk.js.map",
   "static/css/1.7f58169d.chunk.css": "https://panzerstadt.github.io/indoor-gps/static/css/1.7f58169d.chunk.css",
   "static/js/1.1b73eb0b.chunk.js": "https://panzerstadt.github.io/indoor-gps/static/js/1.1b73eb0b.chunk.js",
   "static/js/1.1b73eb0b.chunk.js.map": "https://panzerstadt.github.io/indoor-gps/static/js/1.1b73eb0b.chunk.js.map",
@@ -77,10 +77,10 @@
   "static/media/00074_.jpg": "https://panzerstadt.github.io/indoor-gps/static/media/00074_.c44dd91e.jpg",
   "static/media/00075_.jpg": "https://panzerstadt.github.io/indoor-gps/static/media/00075_.f2ed022a.jpg",
   "static/media/00076_.jpg": "https://panzerstadt.github.io/indoor-gps/static/media/00076_.b2a6d8f2.jpg",
-  "static/media/slick-theme.css": "https://panzerstadt.github.io/indoor-gps/static/media/slick.b7c9e1e4.woff",
-  "static/css/main.f6f7a6e7.chunk.css.map": "https://panzerstadt.github.io/indoor-gps/static/css/main.f6f7a6e7.chunk.css.map",
+  "static/media/slick-theme.css": "https://panzerstadt.github.io/indoor-gps/static/media/slick.f97e3bbf.svg",
   "static/css/1.7f58169d.chunk.css.map": "https://panzerstadt.github.io/indoor-gps/static/css/1.7f58169d.chunk.css.map",
+  "static/css/main.44c9bbdc.chunk.css.map": "https://panzerstadt.github.io/indoor-gps/static/css/main.44c9bbdc.chunk.css.map",
   "index.html": "https://panzerstadt.github.io/indoor-gps/index.html",
-  "precache-manifest.2bbb62d59003ca0777a3e4e6e6a07d35.js": "https://panzerstadt.github.io/indoor-gps/precache-manifest.2bbb62d59003ca0777a3e4e6e6a07d35.js",
+  "precache-manifest.a5223c086521c8d1f9a3cd264fd3f6a0.js": "https://panzerstadt.github.io/indoor-gps/precache-manifest.a5223c086521c8d1f9a3cd264fd3f6a0.js",
   "service-worker.js": "https://panzerstadt.github.io/indoor-gps/service-worker.js"
 }
