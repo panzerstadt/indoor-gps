@@ -1,7 +1,7 @@
 {
-  "main.css": "https://panzerstadt.github.io/indoor-gps/static/css/main.b6f0cd7e.chunk.css",
-  "main.js": "https://panzerstadt.github.io/indoor-gps/static/js/main.4f034c31.chunk.js",
-  "main.js.map": "https://panzerstadt.github.io/indoor-gps/static/js/main.4f034c31.chunk.js.map",
+  "main.css": "https://panzerstadt.github.io/indoor-gps/static/css/main.981370dc.chunk.css",
+  "main.js": "https://panzerstadt.github.io/indoor-gps/static/js/main.f886e83e.chunk.js",
+  "main.js.map": "https://panzerstadt.github.io/indoor-gps/static/js/main.f886e83e.chunk.js.map",
   "static/css/1.7f58169d.chunk.css": "https://panzerstadt.github.io/indoor-gps/static/css/1.7f58169d.chunk.css",
   "static/js/1.d9854bbd.chunk.js": "https://panzerstadt.github.io/indoor-gps/static/js/1.d9854bbd.chunk.js",
   "static/js/1.d9854bbd.chunk.js.map": "https://panzerstadt.github.io/indoor-gps/static/js/1.d9854bbd.chunk.js.map",
@@ -78,9 +78,9 @@
   "static/media/00075_.jpg": "https://panzerstadt.github.io/indoor-gps/static/media/00075_.f2ed022a.jpg",
   "static/media/00076_.jpg": "https://panzerstadt.github.io/indoor-gps/static/media/00076_.b2a6d8f2.jpg",
   "static/media/slick-theme.css": "https://panzerstadt.github.io/indoor-gps/static/media/slick.f97e3bbf.svg",
+  "static/css/main.981370dc.chunk.css.map": "https://panzerstadt.github.io/indoor-gps/static/css/main.981370dc.chunk.css.map",
   "static/css/1.7f58169d.chunk.css.map": "https://panzerstadt.github.io/indoor-gps/static/css/1.7f58169d.chunk.css.map",
-  "static/css/main.b6f0cd7e.chunk.css.map": "https://panzerstadt.github.io/indoor-gps/static/css/main.b6f0cd7e.chunk.css.map",
   "index.html": "https://panzerstadt.github.io/indoor-gps/index.html",
-  "precache-manifest.42cd3ffbde6217a78a6f841fed21e487.js": "https://panzerstadt.github.io/indoor-gps/precache-manifest.42cd3ffbde6217a78a6f841fed21e487.js",
+  "precache-manifest.1544cc0def7dde789dea1f4658745154.js": "https://panzerstadt.github.io/indoor-gps/precache-manifest.1544cc0def7dde789dea1f4658745154.js",
   "service-worker.js": "https://panzerstadt.github.io/indoor-gps/service-worker.js"
 }
