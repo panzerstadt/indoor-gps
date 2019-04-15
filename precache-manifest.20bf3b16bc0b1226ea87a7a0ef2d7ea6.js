@@ -304,19 +304,19 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.b7c9e1e4.woff"
   },
   {
-    "revision": "d41f55a78e6f49a5512878df1737e58a",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.d41f55a7.ttf"
-  },
-  {
     "revision": "ced611daf7709cc778da928fec876475",
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.ced611da.eot"
+  },
+  {
+    "revision": "d41f55a78e6f49a5512878df1737e58a",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.d41f55a7.ttf"
   },
   {
     "revision": "1b73eb0bada913bfd36f",
     "url": "https://panzerstadt.github.io/indoor-gps/static/css/1.7f58169d.chunk.css"
   },
   {
-    "revision": "553f38243216711b31739c7a21fa937d",
+    "revision": "68bbec9bd69868ea098b73809a9edbe9",
     "url": "https://panzerstadt.github.io/indoor-gps/index.html"
   }
 ];

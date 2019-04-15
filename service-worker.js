@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "https://panzerstadt.github.io/indoor-gps/precache-manifest.a5223c086521c8d1f9a3cd264fd3f6a0.js"
+  "https://panzerstadt.github.io/indoor-gps/precache-manifest.20bf3b16bc0b1226ea87a7a0ef2d7ea6.js"
 );
 
 workbox.clientsClaim();

@@ -3,12 +3,12 @@
   "name": "Dino Discovery Indoor GPS",
   "icons": [
     {
-      "src": "/assets/icons/dinomap228.png",
+      "src": "assets/icons/dinomap228.png",
       "type": "image/png",
       "sizes": "228x228"
     },
     {
-      "src": "/assets/icons/dinomap512.png",
+      "src": "assets/icons/dinomap512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
