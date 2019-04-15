@@ -1,0 +1,53 @@
+.intro {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: white;
+  opacity: 1;
+  transition: opacity 500ms ease;
+
+  pointer-events: none;
+  background-color: #ffd166;
+}
+
+.anim {
+  width: 300px;
+  max-height: 300px;
+  margin: 0 auto;
+}
+
+.introText {
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 600px;
+}
+
+.button {
+  transition: all 300ms ease;
+  pointer-events: all;
+  border-radius: 999px;
+  padding: 10px;
+  width: 150px;
+  background-color: white;
+  border: 5px solid #ef476f;
+
+  font-size: 15px;
+  font-weight: bold;
+  color: #ef476f;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #ef476f;
+  border: 5px solid white;
+  color: white;
+}

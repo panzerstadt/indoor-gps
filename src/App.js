@@ -10,9 +10,9 @@ import styles from "./App.module.css";
 // components
 import Map from "./components/Map";
 import CardUI from "./components/UI";
+import IntroPage from "./components/Intro";
 
 // import data
-import tempDataset from "./dataset/test.json";
 import { useCsvData, useWiki, useMultipleWiki } from "./components/useHooks";
 import filepath from "./dataset/class_coords.csv";
 
@@ -33,23 +33,6 @@ const App = props => {
 
   const label = "a dinosaur! RAWR";
 
-  // // test
-  // const [wikiData, setWikiData] = useState();
-  // useEffect(() => {
-  //   const fetchMultiple = async list => {
-  //     const r = await useMultipleWiki(list);
-  //     setWikiData(r);
-  //   };
-
-  //   if (data.length !== 0) {
-  //     const queries = data.map(v => v.label);
-  //     console.log(queries);
-  //     fetchMultiple(queries);
-  //   }
-  // }, [data]);
-
-  // console.log(wikiData);
-
   const pt = {};
 
   const appState = {
@@ -67,6 +50,7 @@ const App = props => {
 
   return (
     <div className={styles.app}>
+      <IntroPage />
       <MainContext.Provider value={appState}>
         <Map>
           <CardUI />

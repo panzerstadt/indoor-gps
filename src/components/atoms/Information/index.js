@@ -1,18 +1,12 @@
-// wiki
-
-/*
-A good indicator that they belong together is that
-they are used one after another (e.g. setIsError,
-setIsLoading). Let’s combine all three of them
-with a Reducer Hook instead.
-*/
-
 // useReducer == do similar things together as a group
 
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 
 import styles from "./index.module.css";
+
+// no img dinosaur
+import NoImg from "./assets/no-dino.jpg";
 
 // grouped state
 const dataFetchReducer = (state, action) => {
@@ -91,7 +85,7 @@ export const useFetch = (initialUrl, initialData) => {
   return { ...state, doFetch };
 };
 
-const WikiSearch = ({ search, onSuccess, ...props }) => {
+const WikiDescription = ({ search, onSuccess, ...props }) => {
   const WIKI_URL = query =>
     `https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}&format=json`;
 
@@ -160,7 +154,7 @@ const WikiImage = ({ search, onSuccess, thumbnailSize = 300, ...props }) => {
   }, [search]);
 
   // effect for replacing img src
-  const [src, setSrc] = useState("#");
+  const [src, setSrc] = useState(NoImg);
   useEffect(() => {
     if (data) {
       const response = data.query.pages;
@@ -170,6 +164,7 @@ const WikiImage = ({ search, onSuccess, thumbnailSize = 300, ...props }) => {
       if (!d.thumbnail) {
         //out = "#";
         // replacement image?
+        setSrc(NoImg);
       } else {
         setSrc(d.thumbnail.source);
         //out = data.thumbnail.source;
@@ -192,8 +187,13 @@ const WikiImage = ({ search, onSuccess, thumbnailSize = 300, ...props }) => {
   );
 };
 
-const InformationCard = ({ search, showImage = false, onClick }) => {
-  const dinoSearch = search.split(" ")[0];
+const InformationCard = ({
+  search,
+  showImage = false,
+  showDescription = true,
+  onClick
+}) => {
+  const dinoSearch = search.split(" ").filter(v => v.length > 5)[0];
   const [wikiPage, setWikiPage] = useState("");
   const [url, setUrl] = useState("#");
 
@@ -209,11 +209,13 @@ const InformationCard = ({ search, showImage = false, onClick }) => {
       <div className={styles.infoContainer}>
         <h5 className={styles.title}>{search}</h5>
         <div className={styles.gradient}> </div>
-        <WikiSearch
-          className={styles.text}
-          search={dinoSearch}
-          onSuccess={handleSearchSuccess}
-        />
+        {showDescription && (
+          <WikiDescription
+            className={styles.text}
+            search={dinoSearch}
+            onSuccess={handleSearchSuccess}
+          />
+        )}
       </div>
     </a>
   );

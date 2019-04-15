@@ -1,4 +1,10 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef
+} from "react";
 
 import styles from "./index.module.css";
 
@@ -18,11 +24,20 @@ const GREY = "#BECEC6";
 
 const ExploreCard = () => {
   const appState = useContext(MainContext);
+  const [width, setWidth] = useState(0);
+  const handleResize = e => {
+    requestAnimationFrame(() => setWidth(window.innerWidth));
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const carouselSettings = {
     arrows: false,
     infinite: false,
-    slidesToShow: 3,
-    slidesToScroll: 3
+    slidesToShow: width > 600 ? 3 : 2,
+    slidesToScroll: width > 600 ? 3 : 2
   };
 
   const [nearestLbls, setNearestLbls] = useState([]);
@@ -64,8 +79,15 @@ const ExploreCard = () => {
             className={styles.carouselMain}
           >
             <div className={styles.carouselContainer}>
-              <img src="#" alt="dino" height={100} />
-              <h5 className={styles.carouselTitle}>{v.label}</h5>
+              <img
+                className={styles.carouselImg}
+                src={v.img}
+                alt="dino"
+                height={100}
+              />
+              <div className={styles.infoContainer}>
+                <h5 className={styles.carouselTitle}>{v.label}</h5>
+              </div>
             </div>
           </div>
         ))}
@@ -95,6 +117,51 @@ const ExploreCard = () => {
           </a>
         </p>
       </small>
+
+      <br />
+      <p>
+        <strong>credits</strong>
+      </p>
+      <p className={styles.credits}>
+        <p>
+          dancing dino animation courtesy of Alex Bradt from{" "}
+          <a
+            href="https://lottiefiles.com/"
+            target="_blank"
+            rel="nooponer nofererer"
+          >
+            lottiefiles.com
+          </a>
+        </p>
+
+        <p>
+          other dinosaur icons and explorer icon courtesy of Freepik from{" "}
+          <a
+            href="https://www.flaticon.com/"
+            target="_blank"
+            rel="nooponer nofererer"
+          >
+            www.flaticon.com
+          </a>
+        </p>
+
+        <p>
+          We are not affiliated, associated, authorized, endorsed by, or in any
+          way officially connected with the National Museum of Nature and
+          Science, or any of its subsidiaries or its affiliates. The official
+          Isabella Stewart Gardner Museum website can be found at{" "}
+          <a
+            href="https://www.kahaku.go.jp/english/index.php"
+            target="_blank"
+            rel="nooponer nofererer"
+          >
+            www.kahaku.go.jp
+          </a>
+          . The names National Museum of Nature and Science as well as related
+          names, marks, emblems and images are registered trademarks of their
+          respective owners.
+        </p>
+      </p>
     </div>
   );
 };

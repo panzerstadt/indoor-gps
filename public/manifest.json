@@ -1,15 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Dino Map",
+  "name": "Dino Discovery Indoor GPS",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "assets/icons/dinomap228.png",
+      "type": "image/png",
+      "sizes": "228x228"
+    },
+    {
+      "src": "assets/icons/dinomap512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
-  "display": "standalone",
+  "orientation": "portrait",
+  "display": "browser",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }

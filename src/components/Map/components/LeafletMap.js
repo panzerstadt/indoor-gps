@@ -154,6 +154,9 @@ const LeafletMap = props => {
     setMainLbl("see what's nearby!");
   };
 
+  console.log(pins);
+  console.log(lbls);
+
   // national history museum map
   const localPosition = [972, 1982]; // north, east
   const localMapBounds = MED_MAP_BOUNDS;
@@ -174,12 +177,16 @@ const LeafletMap = props => {
         points={[point]}
         labels={[mainLbl]}
         //labels={[`${Math.round(point[0])} ${Math.round(point[1])}`]}
-        icons={[MainIcon("arrow", 40)]}
+        icons={[MainIcon("backpacker", 40)]}
         alwaysOpenPopup
       />
 
       {/* nearby markers */}
-      <Markers points={pins} labels={lbls} />
+      <Markers
+        points={pins}
+        labels={lbls}
+        icons={pins.map(_ => MainIcon("diplodocus", 50))}
+      />
     </Map>
   );
 };

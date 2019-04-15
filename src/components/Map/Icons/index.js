@@ -24,7 +24,6 @@ export const MainIcon = (name = "tomato", size) => {
 
   return new L.Icon({
     iconUrl: require(`../../../assets/LeafletMap/icons/${name}.svg`),
-
     iconSize: [size, size],
     iconAnchor: out.iconAnchor,
     popupAnchor: out.popupAnchor

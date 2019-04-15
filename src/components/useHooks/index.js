@@ -2,29 +2,61 @@ import { useState, useEffect, useRef } from "react";
 import { csv } from "d3-fetch";
 import axios from "axios";
 
+// image assets folder path
+const dinoImgs = importAll(
+  require.context("../../assets/images", true, /.*\.jpg$/)
+);
+
+export function importAll(r) {
+  let images = {};
+  r.keys().map((item, index) => {
+    images[item.replace("./", "")] = r(item);
+    return null;
+  });
+  //console.log(images);
+  return images;
+}
+
 export const useCsvData = initialFilepath => {
+  // loading logic
+  const [filepath, setFilepath] = useState(initialFilepath);
+  useEffect(() => {
+    if (filepath) {
+      loadCsv(filepath);
+      loadImgs();
+    }
+  }, [filepath]);
+
   const [data, setData] = useState([]);
   const loadCsv = f => {
     csv(f).then(data => {
       setData(data);
     });
   };
+  const [imgs, setImgs] = useState([]);
+  const loadImgs = f => {
+    const keys = Object.keys(dinoImgs);
+    const sortedKeys = keys.sort((prev, next) => {
+      const n = parseInt(next.replace("_", ""));
+      const p = parseInt(prev.replace("_", ""));
+      return p - n; // earliest first
+    });
+    setImgs(sortedKeys.map(k => dinoImgs[k]));
+  };
 
+  // combine both data
+  const [output, setOutput] = useState([]);
   useEffect(() => {
-    if (initialFilepath) {
-      loadCsv(initialFilepath);
+    if (data.length > 0 && imgs.length > 0) {
+      if (data.length !== imgs.length) {
+        throw "number of dinosaur data don't match number of dinosaur images!";
+      }
+      const out = data.map((v, i) => ({ ...v, img: imgs[i] }));
+      setOutput(out);
     }
-  }, []);
+  }, [data, imgs]);
 
-  const [filepath, setFilepath] = useState();
-
-  useEffect(() => {
-    if (filepath) {
-      loadCsv(filepath);
-    }
-  }, [filepath]);
-
-  return [data, setFilepath];
+  return [output, setFilepath];
 };
 
 export const useWiki = (search = "dinosaur") => {
