@@ -16,7 +16,7 @@ export default ({ data, children }) => {
   return (
     <div className={styles.main}>
       <div className={styles.map}>
-        <LeafletMap height={cardOffsetTop + 10} />
+        <LeafletMap height={cardOffsetTop + 20} />
       </div>
 
       {<div style={{ zIndex: 2, pointerEvents: "none" }}>{children}</div>}

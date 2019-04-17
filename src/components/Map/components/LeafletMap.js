@@ -11,6 +11,7 @@ import { MainContext } from "../../../App";
 // components
 import { Nearby } from "../utils/Nearby";
 import { MainIcon } from "../Icons/index";
+import { useDebounce } from "../../useHooks";
 
 // image
 import PNG_MAP from "../../../assets/LeafletMap/maps/map-01-med-cropped.png";
@@ -61,7 +62,6 @@ const Markers = ({ points, labels, icons, alwaysOpenPopup }) => {
 };
 
 const closestObjects = (point, appState, count = 3) => {
-  // TODO: CLOSEST OBJECTS SEEM TO BE CALCULATING THE WRONG DISTANCES
   const dataPos = appState.dataset.map(v => [v.x, v.y]);
   const closest = Nearby(point, dataPos);
   const closestIndices = closest.map(v => v.index);
@@ -86,7 +86,6 @@ const closestObjects = (point, appState, count = 3) => {
 
 const findLocationFromObject = (name, appState) => {
   const output = appState.dataset.filter(v => v.label === name)[0];
-
   return { lat: output.x, lng: output.y };
 };
 
@@ -117,7 +116,7 @@ const LeafletMap = props => {
     setLbls(lbls);
   }, [point]);
 
-  // didmount
+  // closest pins
   useEffect(() => {
     setClosestList({ pins, lbls });
   }, [pins, lbls]);
@@ -156,10 +155,15 @@ const LeafletMap = props => {
 
   const mapRef = useRef();
   useEffect(() => {
-    console.log("height changed", height);
     const map = mapRef.current.leafletElement;
-    map.invalidateSize({ animate: true });
-  }, [height]);
+
+    // resize map with centering
+    setTimeout(() => {
+      const paddedBounds = new L.LatLngBounds([point, ...pins]);
+      map.fitBounds(paddedBounds, { padding: [50, 50] });
+      map.invalidateSize({ animate: true });
+    }, 300);
+  }, [height, point]);
 
   // national history museum map
   const localMapBounds = MED_MAP_BOUNDS;
@@ -168,7 +172,7 @@ const LeafletMap = props => {
       ref={mapRef}
       animate={true}
       center={point}
-      zoom={1}
+      //zoom={1}
       minZoom={-2}
       maxZoom={2}
       style={{ height: height ? height : 300, width: "100%" }}
