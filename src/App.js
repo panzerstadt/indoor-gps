@@ -30,6 +30,7 @@ const App = props => {
   const [closestList, setClosestList] = useState({ pins: [], lbls: [] });
   const [photo, setPhoto] = useState("");
   const [search, setSearch] = useState("");
+  const [cardOffsetTop, setCardOffsetTop] = useState(window.innerHeight);
 
   const label = "a dinosaur! RAWR";
 
@@ -45,7 +46,9 @@ const App = props => {
     label: label,
     dataset: data,
     search: search,
-    setSearch: setSearch
+    setSearch: setSearch,
+    cardOffsetTop: cardOffsetTop,
+    setCardOffsetTop: setCardOffsetTop
   };
 
   return (

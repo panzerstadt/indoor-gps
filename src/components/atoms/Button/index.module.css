@@ -1,5 +1,9 @@
+:root {
+  --radius: 15px;
+}
+
 .buttonDiv {
-  border-radius: 5px;
+  border-radius: var(--radius);
   background-color: white;
   box-shadow: 0 0 40px #00000018;
 
@@ -16,24 +20,25 @@
 .button {
   transition: all 300ms ease-out;
   outline: none;
+  background-color: white;
 
   min-height: 50px;
   width: 100%;
 
   padding: 15px;
 
-  border-radius: 5px;
+  border-radius: var(--radius);
   border: none;
 }
 
 .buttonLeft {
   composes: button;
-  border-radius: 5px 0 0 5px;
+  border-radius: var(--radius) 0 0 var(--radius);
 }
 
 .buttonRight {
   composes: button;
-  border-radius: 0 5px 5px 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 
 .button:hover {

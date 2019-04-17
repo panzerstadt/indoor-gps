@@ -7,6 +7,7 @@
     "axios": "^0.18.0",
     "d3-dsv": "^1.1.1",
     "d3-fetch": "^1.1.2",
+    "jsdom-quokka-plugin": "^1.0.14",
     "leaflet": "^1.4.0",
     "lottie": "^0.0.1",
     "node-fetch-polyfill": "^2.0.6",
@@ -32,6 +33,17 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "quokka": {
+    "babel": {
+      "presets": [
+        "react-app"
+      ]
+    },
+    "plugins": [
+      "jsdom-quokka-plugin"
+    ],
+    "stdEsm": false
   },
   "browserslist": [
     ">0.2%",

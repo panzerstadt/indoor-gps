@@ -67,7 +67,6 @@ const Predictor = ({
   const [classes, setClasses] = useState();
   const [progress, setProgress] = useState(0);
   const handleProgress = v => {
-    console.log(v);
     setProgress(v);
     if (onProgress) onProgress(v);
   };
@@ -168,7 +167,7 @@ const Predictor = ({
       //console.log(classes.slice(0, 5));
       //console.log("top 1");
       //console.log(classes[0]);
-      console.log(dinos.slice(0, 5));
+      console.log("predictions: ", dinos.slice(0, 5));
     }
   };
   useEffect(() => {

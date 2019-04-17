@@ -44,7 +44,7 @@ const ExploreCard = () => {
   useEffect(() => {
     if (appState.closestList.lbls.length > 0) {
       setNearestLbls(appState.closestList.lbls);
-      console.log(appState.closestList.lbls);
+      //console.log(appState.closestList.lbls);
     }
   }, [appState.closestList]);
 
@@ -122,7 +122,7 @@ const ExploreCard = () => {
       <p>
         <strong>credits</strong>
       </p>
-      <p className={styles.credits}>
+      <div className={styles.credits}>
         <p>
           dancing dino animation courtesy of Alex Bradt from{" "}
           <a
@@ -161,7 +161,7 @@ const ExploreCard = () => {
           names, marks, emblems and images are registered trademarks of their
           respective owners.
         </p>
-      </p>
+      </div>
     </div>
   );
 };
@@ -234,25 +234,33 @@ const Buttons = ({ inputs, onSubmit }) => {
 const UI = () => {
   const pages = ["explore 🔍", "📷"];
   const appState = useContext(MainContext);
-  const [currentPage, setCurrentPage] = useState(pages[0]);
+  const [currentPage, setCurrentPage] = useState("main");
 
   const handlePageTransition = () => {
     // TODO: smooth slide out/in/fade transition
   };
 
+  // if there is a new search result, switch over to explore page
   useEffect(() => {
-    setCurrentPage(pages[0]);
+    if (appState.search) setCurrentPage(pages[0]);
   }, [appState.search]);
 
   if (currentPage === pages[0]) {
     return (
-      <Card onExit={() => setCurrentPage("main")} blurOnButtonOnly>
+      <Card
+        onExit={() => setCurrentPage("main")}
+        onOffsetTop={appState.setCardOffsetTop}
+        blurOnButtonOnly
+      >
         <ExploreCard />
       </Card>
     );
   } else if (currentPage === pages[1]) {
     return (
-      <Card text="discover" onExit={() => setCurrentPage("main")}>
+      <Card
+        onExit={() => setCurrentPage("main")}
+        onOffsetTop={appState.setCardOffsetTop}
+      >
         <DiscoverCard />
       </Card>
     );

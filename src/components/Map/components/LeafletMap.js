@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Map, Marker, Popup, TileLayer, ImageOverlay } from "react-leaflet";
 import L from "leaflet";
 
@@ -154,14 +154,19 @@ const LeafletMap = props => {
     setMainLbl("see what's nearby!");
   };
 
-  console.log(pins);
-  console.log(lbls);
+  const mapRef = useRef();
+  useEffect(() => {
+    console.log("height changed", height);
+    const map = mapRef.current.leafletElement;
+    map.invalidateSize({ animate: true });
+  }, [height]);
 
   // national history museum map
-  const localPosition = [972, 1982]; // north, east
   const localMapBounds = MED_MAP_BOUNDS;
   return (
     <Map
+      ref={mapRef}
+      animate={true}
       center={point}
       zoom={1}
       minZoom={-2}
