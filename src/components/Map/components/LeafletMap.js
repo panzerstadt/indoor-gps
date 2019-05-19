@@ -194,7 +194,7 @@ const LeafletMap = props => {
       <Markers
         points={pins}
         labels={lbls}
-        icons={pins.map(_ => MainIcon("pixel", 80))}
+        icons={pins.map(_ => MainIcon("customdino", 40))}
       />
     </Map>
   );

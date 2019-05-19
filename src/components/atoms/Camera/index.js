@@ -3,9 +3,9 @@ import Webcam from "react-webcam";
 
 import styles from "./index.module.css";
 
-import Clip from "../Loading";
+import ClipPath, { Clip4Outline } from "../CameraClipPath";
 
-const WebcamComponent = ({ onRef }) => {
+const WebcamComponent = ({ onRef, strokeClr }) => {
   const webcamRef = useRef();
   const [cameraReady, setCameraReady] = useState(false);
   const setupCamera = async () => {
@@ -33,8 +33,17 @@ const WebcamComponent = ({ onRef }) => {
 
   return (
     <div className={styles.cameraDiv}>
-      <Clip />
-      <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+      <Clip4Outline
+        className={styles.cameraOutline}
+        height={50}
+        width={50}
+        stroke={strokeClr}
+      />
+      <div className={styles.camera}>
+        <ClipPath />
+
+        <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+      </div>
     </div>
   );
 };

@@ -1,4 +1,10 @@
 .cameraDiv {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.camera {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,6 +15,33 @@
   /* border-radius: 999px; */
   overflow: hidden;
   transform: scaleX(-1);
+  z-index: 1;
 
+  /* clip path taken from CameraClipPath */
   clip-path: url(#svgPath);
+}
+
+.cameraOutline {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+  transform: scaleX(-1);
+  fill: transparent;
+  stroke-width: 3px;
+  stroke-dasharray: 8 4;
+  animation: orbit 5s infinite linear;
+
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes orbit {
+  to {
+    stroke-dashoffset: 48px;
+  }
 }

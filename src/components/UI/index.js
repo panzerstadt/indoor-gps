@@ -219,14 +219,24 @@ const DiscoverCard = () => {
     else return `${px}px solid ${GREY}`;
   };
 
+  const animatedStrokeColor = () => {
+    if (ready && !triggerPrediction) return GREEN;
+    else if (ready && triggerPrediction) return YELLOW;
+    else return GREY;
+  };
+
   return (
     <div className={styles.discoverDiv}>
       <div
         onClick={() => setTriggerPrediction(true)}
         className={styles.cameraContainer}
-        style={{ border: animatedBorder() }}
+        // style={{ border: animatedBorder() }}
       >
-        <Camera onTakePhoto={onTakePhoto} onRef={setVideoRef} />
+        <Camera
+          // onTakePhoto={onTakePhoto}
+          onRef={setVideoRef}
+          strokeClr={animatedStrokeColor()}
+        />
       </div>
       {/* <AnimatedLogo /> */}
       <p>point the camera toward the nearest dinosaur and take a photo!</p>
@@ -267,7 +277,7 @@ const UI = () => {
 
   // if there is a new search result, switch over to explore page
   useEffect(() => {
-    if (appState.search) setCurrentPage(pages[0]);
+    if (appState.search) setCurrentPage(pages[0].value);
   }, [appState.search]);
 
   if (currentPage === pages[0].value) {
