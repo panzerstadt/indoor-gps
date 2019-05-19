@@ -1,0 +1,30 @@
+.loading {
+  width: 100%;
+}
+.filledHeading {
+  text-transform: uppercase;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 5em;
+  line-height: 0.9;
+}
+
+/* Animate the background shapes */
+#background path {
+  animation: pulse 4s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+
+  /* Necessary to keep the SVG objects in place while scaling */
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+}
+
+@keyframes pulse {
+  /* Rotating it along with the scale makes it a little bit more fancy */
+  0%,
+  100% {
+    transform: scale(0) rotate(33deg);
+  }
+  35%,
+  65% {
+    transform: scale(1) rotate(0deg);
+  }
+}

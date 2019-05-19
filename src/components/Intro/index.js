@@ -31,10 +31,14 @@ const IntroPage = ({ onClick, isShowing }) => {
           <Lottie options={options} isStopped={false} isPaused={false} />
         </div>
 
-        <h1>welcome adventurer!</h1>
+        <h1>Welcome Adventurer!</h1>
         <h4>
           Dino Map helps you discover the wonders of the many dinosaur exhibits
           in Tokyo's National Museum of Nature and Science!
+        </h4>
+        <h4>
+          Are you ready to embark on a hunt for the amazing exhibits in the
+          museum?
         </h4>
         <button className={styles.button} onClick={() => setShowing(false)}>
           I'm Ready!

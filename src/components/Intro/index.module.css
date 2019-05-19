@@ -16,19 +16,34 @@
   transition: opacity 500ms ease;
 
   pointer-events: none;
-  background-color: #ffd166;
+  background-color: #eef3f9;
 }
 
 .anim {
-  width: 300px;
+  width: 250px;
   max-height: 300px;
-  margin: 0 auto;
+  margin: -50px;
 }
 
 .introText {
   margin: 0 auto;
   padding: 30px;
-  max-width: 600px;
+  max-width: 400px;
+  color: #26568d;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.introText > h1 {
+  line-height: 1.2;
+}
+
+.introText > h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .button {
@@ -38,11 +53,11 @@
   padding: 10px;
   width: 150px;
   background-color: white;
-  border: 5px solid #ef476f;
+  border: 5px solid #5591d6;
 
   font-size: 15px;
   font-weight: bold;
-  color: #ef476f;
+  color: #5591d6;
   outline: none;
 }
 

@@ -6,7 +6,9 @@
   height: 300px;
   object-fit: cover;
   object-position: center;
-  border-radius: 999px;
+  /* border-radius: 999px; */
   overflow: hidden;
   transform: scaleX(-1);
+
+  clip-path: url(#svgPath);
 }

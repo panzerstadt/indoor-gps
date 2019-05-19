@@ -18,10 +18,12 @@
   justify-content: center;
 
   width: 100%;
-  padding-bottom: 10px;
 
   position: fixed;
-  bottom: 15px;
+}
+
+.exploreDiv {
+  color: #336699;
 }
 
 .carouselMain {
@@ -38,6 +40,10 @@
 
   height: 200px;
   overflow: visible;
+}
+
+.carouselDiv * {
+  color: #336699;
 }
 
 /* card styling */
@@ -95,6 +101,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #5591d6;
 }
 
 .cameraContainer {

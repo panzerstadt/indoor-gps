@@ -7,6 +7,7 @@
   background-color: white;
   box-shadow: 0 0 40px #00000018;
 
+  width: 100%;
   min-width: 350px;
   max-width: 600px;
 
@@ -34,14 +35,21 @@
 .buttonLeft {
   composes: button;
   border-radius: var(--radius) 0 0 var(--radius);
+  border-radius: 0;
 }
 
 .buttonRight {
   composes: button;
   border-radius: 0 var(--radius) var(--radius) 0;
+  border-radius: 0;
 }
 
 .button:hover {
-  background-color: black;
+  background-color: #ef476f;
+
   color: white;
+}
+
+.button:hover * {
+  fill: white;
 }

@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 
 import styles from "./index.module.css";
 
+import Clip from "../Loading";
+
 const WebcamComponent = ({ onRef }) => {
   const webcamRef = useRef();
   const [cameraReady, setCameraReady] = useState(false);
@@ -31,6 +33,7 @@ const WebcamComponent = ({ onRef }) => {
 
   return (
     <div className={styles.cameraDiv}>
+      <Clip />
       <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
     </div>
   );

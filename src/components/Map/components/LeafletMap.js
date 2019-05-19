@@ -14,9 +14,9 @@ import { MainIcon } from "../Icons/index";
 import { useDebounce } from "../../useHooks";
 
 // image
-import PNG_MAP from "../../../assets/LeafletMap/maps/map-01-med-cropped.png";
+import MAP from "../../../assets/LeafletMap/maps/map-01-med-cropped-4x.jpg";
 const LRG_MAP_BOUNDS = [[0, 0], [100, 400]];
-const MED_MAP_BOUNDS = [[0, 0], [2500, 2738]];
+const MED_MAP_BOUNDS = [[0, 0], [2500, 2738]]; // as long as proportions match, img can be scaled up
 
 // the bug where the pins don't show
 // https://github.com/PaulLeCam/react-leaflet/issues/453
@@ -179,7 +179,7 @@ const LeafletMap = props => {
       onClick={handleMapClick}
       crs={L.CRS.Simple}
     >
-      <ImageOverlay alt="local map" url={PNG_MAP} bounds={localMapBounds} />
+      <ImageOverlay alt="local map" url={MAP} bounds={localMapBounds} />
 
       {/* main marker */}
       <Markers
@@ -194,7 +194,7 @@ const LeafletMap = props => {
       <Markers
         points={pins}
         labels={lbls}
-        icons={pins.map(_ => MainIcon("diplodocus", 50))}
+        icons={pins.map(_ => MainIcon("pixel", 80))}
       />
     </Map>
   );

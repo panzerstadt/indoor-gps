@@ -18,6 +18,9 @@ import Information, { useFetch } from "../atoms/Information";
 import { MainContext } from "../../App";
 import { useWiki } from "../useHooks";
 
+import { ReactComponent as DiscoverLogo } from "../../assets/buttons/noun_adventure_1078354.svg";
+import { ReactComponent as ExploreLogo } from "../../assets/buttons/noun_Map_1084274.svg";
+
 const GREEN = "#3AB795";
 const YELLOW = "#FFC532";
 const GREY = "#BECEC6";
@@ -146,6 +149,24 @@ const ExploreCard = () => {
         </p>
 
         <p>
+          pixellated dinosaur logo - dinosaurs by Sumana Chamrunworakiat from
+          the Noun Project OR Dinosaur by Jennifer Goodman from the Noun Project
+          OR fossils by ruliani from the Noun Project
+        </p>
+
+        <p>
+          {" "}
+          sauropod by Made x Made from the Noun Project from{" "}
+          <a
+            href="https://thenounproject.com/christian933/collection/dinosaur/"
+            target="_blank"
+            rel="nooponer nofererer"
+          >
+            thenounproject.com
+          </a>{" "}
+        </p>
+
+        <p>
           We are not affiliated, associated, authorized, endorsed by, or in any
           way officially connected with the National Museum of Nature and
           Science, or any of its subsidiaries or its affiliates. The official
@@ -208,6 +229,7 @@ const DiscoverCard = () => {
         <Camera onTakePhoto={onTakePhoto} onRef={setVideoRef} />
       </div>
       {/* <AnimatedLogo /> */}
+      <p>point the camera toward the nearest dinosaur and take a photo!</p>
 
       <code>prediction: {pred}</code>
       <Predictor
@@ -232,7 +254,10 @@ const Buttons = ({ inputs, onSubmit }) => {
 };
 
 const UI = () => {
-  const pages = ["explore 🔍", "📷"];
+  const pages = [
+    { value: "explore 🔍", logo: ExploreLogo },
+    { value: "📷", logo: DiscoverLogo }
+  ];
   const appState = useContext(MainContext);
   const [currentPage, setCurrentPage] = useState("main");
 
@@ -245,7 +270,7 @@ const UI = () => {
     if (appState.search) setCurrentPage(pages[0]);
   }, [appState.search]);
 
-  if (currentPage === pages[0]) {
+  if (currentPage === pages[0].value) {
     return (
       <Card
         onExit={() => setCurrentPage("main")}
@@ -255,7 +280,7 @@ const UI = () => {
         <ExploreCard />
       </Card>
     );
-  } else if (currentPage === pages[1]) {
+  } else if (currentPage === pages[1].value) {
     return (
       <Card
         onExit={() => setCurrentPage("main")}
@@ -265,9 +290,7 @@ const UI = () => {
       </Card>
     );
   } else {
-    return (
-      <Buttons inputs={pages} onSubmit={e => setCurrentPage(e.target.value)} />
-    );
+    return <Buttons inputs={pages} onSubmit={e => setCurrentPage(e.value)} />;
   }
 
   return;

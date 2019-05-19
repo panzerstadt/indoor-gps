@@ -9,11 +9,11 @@ export const Button = ({ inputs = ["button"], onSubmit }) => {
     return (
       <button
         className={styles.button}
-        key={inputs[0]}
+        key={inputs[0].value || inputs[0]}
         onClick={onSubmit}
-        value={inputs[0]}
+        value={inputs[0].value || inputs[0]}
       >
-        {inputs[0]}
+        {inputs[0].logo || inputs[0]}
       </button>
     );
   }
@@ -21,15 +21,22 @@ export const Button = ({ inputs = ["button"], onSubmit }) => {
   const btns = inputs.map((v, i) => {
     // if multiple buttons, make complex button
 
+    let logo;
+    if (v.logo && typeof v.logo === "function") {
+      logo = <v.logo fill="#336699" height={50} width={50} />;
+    } else {
+      logo = v.logo || v;
+    }
+
     if (i === 0) {
       return (
         <button
           className={styles.buttonLeft}
           key={i}
-          onClick={onSubmit}
-          value={v}
+          onClick={e => onSubmit({ ...e, value: v.value || v })}
+          value={v.value || v}
         >
-          {v}
+          {logo}
         </button>
       );
     } else if (i === inputs.length - 1) {
@@ -37,16 +44,21 @@ export const Button = ({ inputs = ["button"], onSubmit }) => {
         <button
           className={styles.buttonRight}
           key={i}
-          onClick={onSubmit}
-          value={v}
+          onClick={e => onSubmit({ ...e, value: v.value || v })}
+          value={v.value || v}
         >
-          {v}
+          {logo}
         </button>
       );
     } else {
       return (
-        <button className={styles.button} key={i} onClick={onSubmit} value={v}>
-          {v}
+        <button
+          className={styles.button}
+          key={i}
+          onClick={e => onSubmit({ ...e, value: v.value || v })}
+          value={v.value || v}
+        >
+          {logo}
         </button>
       );
     }
