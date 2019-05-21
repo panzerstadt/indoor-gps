@@ -1,0 +1,33 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.bubble {
+  fill: rgba(255, 255, 255, 0.466);
+  stroke: #5591d6;
+  stroke-width: 2px;
+  transform: scale(-1, 1);
+}
+
+.textContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 130px;
+  width: 250px;
+
+  margin: 40px;
+  margin-left: 35px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.text {
+  margin: 0 auto;
+  font-size: 1.3rem;
+  font-weight: 600;
+}

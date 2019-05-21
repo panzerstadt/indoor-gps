@@ -14,6 +14,7 @@ import Predictor from "../atoms/Predictor";
 import Button from "../atoms/Button";
 import Carousel from "../atoms/Carousel";
 import Information, { useFetch } from "../atoms/Information";
+import SpeechBubble from "../atoms/BubbleText";
 
 import { MainContext } from "../../App";
 import { useWiki } from "../useHooks";
@@ -170,7 +171,7 @@ const ExploreCard = () => {
           We are not affiliated, associated, authorized, endorsed by, or in any
           way officially connected with the National Museum of Nature and
           Science, or any of its subsidiaries or its affiliates. The official
-          Isabella Stewart Gardner Museum website can be found at{" "}
+          National Museum of Nature and Science website can be found at{" "}
           <a
             href="https://www.kahaku.go.jp/english/index.php"
             target="_blank"
@@ -225,23 +226,40 @@ const DiscoverCard = () => {
     else return GREY;
   };
 
+  const [bubbleText, setBubbleText] = useState("hello!");
+  const INTRO_TEXT =
+    "point me toward a dinosaur head and tap me to take a photo!";
+  useEffect(() => {
+    if (pred) {
+      setBubbleText(`I think i see a ${pred}!`);
+    }
+    if (triggerPrediction) {
+      setBubbleText("hmm.. lemme think...");
+    }
+    // TODO: reset to intro text on card open
+  }, [pred, triggerPrediction]);
+  const handleShowProgress = v => {
+    if (v < 1) setBubbleText("getting ready...");
+    if (v === 1) setBubbleText(INTRO_TEXT);
+  };
+
   return (
     <div className={styles.discoverDiv}>
       <div
-        onClick={() => setTriggerPrediction(true)}
         className={styles.cameraContainer}
         // style={{ border: animatedBorder() }}
       >
+        <SpeechBubble className={styles.speechBubble} text={bubbleText} />
         <Camera
           // onTakePhoto={onTakePhoto}
+          onClick={() => setTriggerPrediction(true)}
+          className={styles.camera}
           onRef={setVideoRef}
           strokeClr={animatedStrokeColor()}
         />
+        {/* <AnimatedLogo /> */}
       </div>
-      {/* <AnimatedLogo /> */}
-      <p>point the camera toward the nearest dinosaur and take a photo!</p>
 
-      <code>prediction: {pred}</code>
       <Predictor
         videoRef={videoRef}
         onTrigger={triggerPrediction}
@@ -250,6 +268,7 @@ const DiscoverCard = () => {
           setTriggerPrediction(false);
         }}
         onLoaded={setReady}
+        onProgress={handleShowProgress}
       />
     </div>
   );
@@ -295,6 +314,7 @@ const UI = () => {
       <Card
         onExit={() => setCurrentPage("main")}
         onOffsetTop={appState.setCardOffsetTop}
+        overflow
       >
         <DiscoverCard />
       </Card>

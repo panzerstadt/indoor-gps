@@ -12,9 +12,14 @@ import { MainContext } from "../../../App";
 import { Nearby } from "../utils/Nearby";
 import { MainIcon } from "../Icons/index";
 import { useDebounce } from "../../useHooks";
+import { isiOS } from "./utils";
 
 // image
-import MAP from "../../../assets/LeafletMap/maps/map-01-med-cropped-4x.jpg";
+// MOBILE SAFARI ONLY
+import MAP_IOS from "../../../assets/LeafletMap/maps/map-01-med-cropped-7k.jpf";
+import MAP_ALL from "../../../assets/LeafletMap/maps/map-01-med-cropped-7k.jpg";
+
+const MAP = isiOS() ? MAP_IOS : MAP_ALL;
 const LRG_MAP_BOUNDS = [[0, 0], [100, 400]];
 const MED_MAP_BOUNDS = [[0, 0], [2500, 2738]]; // as long as proportions match, img can be scaled up
 

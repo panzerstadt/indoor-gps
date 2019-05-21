@@ -96,17 +96,43 @@
 }
 
 .discoverDiv {
+  height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   color: #5591d6;
 }
 
 .cameraContainer {
+  position: relative;
   transition: border 500ms ease;
-  border-radius: 999px;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camera {
+  position: relative;
+  height: 300px;
+  width: 300px;
+}
+
+.speechBubble {
+  z-index: 100;
+  position: absolute;
+  /* top: -170px; */
+
+  padding-bottom: 440px;
+  padding-right: 50px;
+
+  height: 300px;
+  width: 320px;
 }
 
 .animatedLogo {

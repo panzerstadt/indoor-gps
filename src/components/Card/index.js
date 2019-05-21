@@ -10,7 +10,9 @@ const Card = ({
   blurOnButtonOnly,
   hideExitButton,
   children,
-  onOffsetTop
+  onOffsetTop,
+  transparent,
+  overflow
 }) => {
   const cardDivRef = useRef(null);
 
@@ -68,6 +70,10 @@ const Card = ({
     <div
       ref={cardDivRef}
       className={styles.card}
+      style={{
+        backgroundColor: transparent ? "transparent" : "white",
+        overflow: overflow ? "visible" : "scroll"
+      }}
       tabIndex="-1"
       onBlur={exitCard}
     >

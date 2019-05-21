@@ -40,7 +40,11 @@ const IntroPage = ({ onClick, isShowing }) => {
           Are you ready to embark on a hunt for the amazing exhibits in the
           museum?
         </h4>
-        <button className={styles.button} onClick={() => setShowing(false)}>
+        <button
+          className={styles.button}
+          style={{ pointerEvents: showing ? "all" : "none" }}
+          onClick={() => setShowing(false)}
+        >
           I'm Ready!
         </button>
       </div>

@@ -197,7 +197,7 @@ const Predictor = ({
         toggle detection
       </button>
       <br /> */}
-      {progress === 1 ? "" : `model loading: ${(progress * 100).toFixed(2)}%`}
+      {/* {progress === 1 ? "" : `model loading: ${(progress * 100).toFixed(2)}%`} */}
     </div>
   );
 };

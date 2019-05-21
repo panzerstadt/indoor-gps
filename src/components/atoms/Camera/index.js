@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 
 import ClipPath, { Clip4Outline } from "../CameraClipPath";
 
-const WebcamComponent = ({ onRef, strokeClr }) => {
+const WebcamComponent = ({ onRef, strokeClr, ...props }) => {
   const webcamRef = useRef();
   const [cameraReady, setCameraReady] = useState(false);
   const setupCamera = async () => {
@@ -32,7 +32,7 @@ const WebcamComponent = ({ onRef, strokeClr }) => {
   }, [webcamRef, onRef, cameraReady]);
 
   return (
-    <div className={styles.cameraDiv}>
+    <div className={styles.cameraDiv} {...props}>
       <Clip4Outline
         className={styles.cameraOutline}
         height={50}
