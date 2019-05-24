@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00031_.af7d6463.jpg"
   },
   {
-    "revision": "5229716aa32b3de00ac9",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/css/main.5a4e0df2.chunk.css"
+    "revision": "1f535d6bc42a8c96296f",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/css/main.74a9a96f.chunk.css"
   },
   {
     "revision": "30bddb70ddee4b453e3f21a743f73c7b",
@@ -176,8 +176,8 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00026_.7fbfbe4d.jpg"
   },
   {
-    "revision": "5229716aa32b3de00ac9",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/js/main.5229716a.chunk.js"
+    "revision": "1f535d6bc42a8c96296f",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/js/main.1f535d6b.chunk.js"
   },
   {
     "revision": "1889eaac0a572e38441aaf1577587c72",
@@ -316,20 +316,20 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00076_.b2a6d8f2.jpg"
   },
   {
-    "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.b7c9e1e4.woff"
+    "revision": "ced611daf7709cc778da928fec876475",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.ced611da.eot"
   },
   {
-    "revision": "f97e3bbf73254b0112091d0192f17aec",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.f97e3bbf.svg"
+    "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.b7c9e1e4.woff"
   },
   {
     "revision": "d41f55a78e6f49a5512878df1737e58a",
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.d41f55a7.ttf"
   },
   {
-    "revision": "ced611daf7709cc778da928fec876475",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.ced611da.eot"
+    "revision": "f97e3bbf73254b0112091d0192f17aec",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.f97e3bbf.svg"
   },
   {
     "revision": "69cd1e2f0ff685b77ff788d068cded13",
@@ -348,7 +348,7 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/css/1.366690a4.chunk.css"
   },
   {
-    "revision": "a0eb4b5363aebe335bb160418432d3b6",
+    "revision": "fe24472409bdc2fc1352243a6d987df4",
     "url": "https://panzerstadt.github.io/indoor-gps/index.html"
   }
 ];
