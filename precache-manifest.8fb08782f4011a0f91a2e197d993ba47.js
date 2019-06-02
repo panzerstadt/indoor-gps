@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00031_.af7d6463.jpg"
   },
   {
-    "revision": "bf2b996c52704badfbec",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/css/main.df944ed1.chunk.css"
+    "revision": "09aaaa7fae74625bbcb2",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/css/main.33365fb4.chunk.css"
   },
   {
     "revision": "30bddb70ddee4b453e3f21a743f73c7b",
@@ -176,8 +176,8 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00026_.7fbfbe4d.jpg"
   },
   {
-    "revision": "bf2b996c52704badfbec",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/js/main.bf2b996c.chunk.js"
+    "revision": "09aaaa7fae74625bbcb2",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/js/main.09aaaa7f.chunk.js"
   },
   {
     "revision": "1889eaac0a572e38441aaf1577587c72",
@@ -320,16 +320,16 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.ced611da.eot"
   },
   {
-    "revision": "d41f55a78e6f49a5512878df1737e58a",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.d41f55a7.ttf"
-  },
-  {
     "revision": "f97e3bbf73254b0112091d0192f17aec",
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.f97e3bbf.svg"
   },
   {
     "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.b7c9e1e4.woff"
+  },
+  {
+    "revision": "d41f55a78e6f49a5512878df1737e58a",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.d41f55a7.ttf"
   },
   {
     "revision": "69cd1e2f0ff685b77ff788d068cded13",
@@ -348,7 +348,7 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/css/1.02721293.chunk.css"
   },
   {
-    "revision": "1ca38aab9987e7e5d2c0c549e40652c2",
+    "revision": "585d76dc971483e76ee4613628ada430",
     "url": "https://panzerstadt.github.io/indoor-gps/index.html"
   }
 ];
