@@ -20,6 +20,8 @@ import filepath from "./dataset/class_coords.csv";
 export const MainContext = React.createContext();
 
 const App = props => {
+  // intro page
+  const [isShowingIntro, setIsShowingIntro] = useState(true);
   // load data
   const [data, setDataFilepath] = useCsvData(filepath);
   // customer journey
@@ -53,7 +55,7 @@ const App = props => {
 
   return (
     <div className={styles.app}>
-      <IntroPage />
+      {isShowingIntro && <IntroPage isShowing={setIsShowingIntro} />}
       <MainContext.Provider value={appState}>
         <Map>
           <CardUI />

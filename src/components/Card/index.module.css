@@ -1,4 +1,5 @@
 .card {
+  position: absolute;
   pointer-events: all;
   outline: none;
 
@@ -31,17 +32,20 @@
 }
 
 .buttonDiv {
+  pointer-events: all;
+  position: absolute;
+  /* bottom: 360px; */
   display: flex;
   justify-content: flex-end;
 
-  width: 98%;
+  width: calc(100% - 30px);
 }
 
 .exitButton {
   outline: none;
-  position: absolute;
+  /* position: absolute; */
   /* right: 10px; */
-  margin-top: -35px;
+  /* margin-top: -35px; */
 
   height: 50px;
   width: 50px;

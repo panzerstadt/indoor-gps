@@ -16,8 +16,10 @@ import { isiOS } from "./utils";
 
 // image
 // MOBILE SAFARI ONLY
-import MAP_IOS from "../../../assets/LeafletMap/maps/map-01-med-cropped-7k.jpf";
-import MAP_ALL from "../../../assets/LeafletMap/maps/map-01-med-cropped-7k.jpg";
+//import MAP_IOS from "../../../assets/LeafletMap/maps/map-01-med-cropped-7k.jpf";
+//import MAP_ALL from "../../../assets/LeafletMap/maps/map-01-med-cropped-7k.jpg";
+import MAP_IOS from "../../../assets/LeafletMap/maps/map-01-med-cropped.png";
+import MAP_ALL from "../../../assets/LeafletMap/maps/map-01-med-cropped.png";
 
 const MAP = isiOS() ? MAP_IOS : MAP_ALL;
 const LRG_MAP_BOUNDS = [[0, 0], [100, 400]];

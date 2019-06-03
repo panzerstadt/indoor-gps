@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./index.module.css";
 
-import { ReactComponent as SpeechBubble } from "./assets/bubble.svg";
+import { ReactComponent as SpeechBubble } from "./assets/bubble-thinner.svg";
 
 const Bubble = ({ text, ...props }) => {
   return (

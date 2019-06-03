@@ -5,6 +5,8 @@ import styles from "./index.module.css";
 
 import ClipPath, { Clip4Outline } from "../CameraClipPath";
 
+const VIDEO_CONSTRAINTS = { facingMode: "environment" };
+
 const WebcamComponent = ({ onRef, strokeClr, ...props }) => {
   const webcamRef = useRef();
   const [cameraReady, setCameraReady] = useState(false);
@@ -42,7 +44,12 @@ const WebcamComponent = ({ onRef, strokeClr, ...props }) => {
       <div className={styles.camera}>
         <ClipPath />
 
-        <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" />
+        <Webcam
+          audio={false}
+          ref={webcamRef}
+          videoConstraints={VIDEO_CONSTRAINTS}
+          screenshotFormat="image/jpeg"
+        />
       </div>
     </div>
   );

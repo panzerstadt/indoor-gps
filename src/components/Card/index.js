@@ -1,9 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
+import posed from "react-pose";
 
 // styles
 import styles from "./index.module.css";
-import { update } from "@tensorflow/tfjs-layers/dist/variables";
 
+const CardDiv = posed.div({
+  visible: {
+    opacity: 1,
+    bottom: 0,
+    transition: { ease: "backOut", duration: 600 }
+  },
+  hidden: {
+    opacity: 0,
+    bottom: -300,
+    transition: { ease: [0.3, 0.28, 0.34, -0.26], duration: 600 }
+  }
+});
+
+// TODO: fix slow fade in
+// const CardDiv = posed.div({
+//   visible: { opacity: 1, marginBottom: 0 },
+//   hidden: { opacity: 0, marginBottom: -500 }
+// });
 const Card = ({
   text,
   onExit,
@@ -15,6 +33,10 @@ const Card = ({
   overflow
 }) => {
   const cardDivRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const exitCard = e => {
     // where is the user clicking?
@@ -28,7 +50,8 @@ const Card = ({
     if (e.currentTarget && e.currentTarget.tagName === "BUTTON") {
       console.log("exited through button!");
       onOffsetTop && onOffsetTop(window.innerHeight);
-      onExit();
+      setIsVisible(false);
+      //onExit();
     } else if (e.relatedTarget) {
       const className = e.relatedTarget.className.split(" ")[0];
 
@@ -36,7 +59,8 @@ const Card = ({
       if (className === "leaflet-container" && !blurOnButtonOnly) {
         console.log("exiting by clicking on map!");
         onOffsetTop && onOffsetTop(window.innerHeight);
-        onExit();
+        setIsVisible(false);
+        //onExit();
       }
     } else {
       console.log("somethings wrong with the card exit logic. event:", e);
@@ -67,27 +91,31 @@ const Card = ({
   }, [cardDivRef]);
 
   return (
-    <div
+    <CardDiv
       ref={cardDivRef}
       className={styles.card}
       style={{
         backgroundColor: transparent ? "transparent" : "white",
         overflow: overflow ? "visible" : "scroll"
       }}
-      tabIndex="-1"
+      // tabIndex="-1"
       onBlur={exitCard}
+      pose={isVisible ? "visible" : "hidden"}
+      onPoseComplete={() => {
+        !isVisible && onExit();
+      }}
     >
-      {hideExitButton ? null : (
-        <div className={styles.buttonDiv}>
-          <button className={styles.exitButton} onClick={exitCard}>
-            X
-          </button>
-        </div>
-      )}
-
+      <div
+        className={styles.buttonDiv}
+        style={{ display: hideExitButton ? "none" : "flex" }}
+      >
+        <button className={styles.exitButton} onClick={exitCard}>
+          X
+        </button>
+      </div>
       {text}
       {children}
-    </div>
+    </CardDiv>
   );
 };
 

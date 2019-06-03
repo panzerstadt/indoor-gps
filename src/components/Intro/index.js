@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import posed from "react-pose";
 
 import Lottie from "react-lottie";
 
@@ -15,17 +16,23 @@ const options = {
   }
 };
 
+const Intro = posed.div({
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 }
+});
+
 const IntroPage = ({ onClick, isShowing }) => {
   const [showing, setShowing] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setShowing(false);
+      isShowing && isShowing(false);
     }, 30000);
   }, []);
 
   return (
-    <div className={styles.intro} style={{ opacity: showing ? 1 : 0 }}>
+    <Intro className={styles.intro} pose={showing ? "visible" : "hidden"}>
       <div className={styles.introText}>
         <div className={styles.anim}>
           <Lottie options={options} isStopped={false} isPaused={false} />
@@ -48,7 +55,7 @@ const IntroPage = ({ onClick, isShowing }) => {
           I'm Ready!
         </button>
       </div>
-    </div>
+    </Intro>
   );
 };
 

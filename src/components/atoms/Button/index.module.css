@@ -3,7 +3,7 @@
 }
 
 .buttonDiv {
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   background-color: white;
   box-shadow: 0 0 40px #00000018;
 

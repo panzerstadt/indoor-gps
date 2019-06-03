@@ -20,6 +20,8 @@
   width: 100%;
 
   position: fixed;
+  bottom: 0;
+  z-index: 10000;
 }
 
 .exploreDiv {
@@ -127,12 +129,12 @@
   z-index: 100;
   position: absolute;
   /* top: -170px; */
-
-  padding-bottom: 440px;
-  padding-right: 50px;
+  bottom: 0;
+  padding-bottom: 255px;
+  padding-right: 70px;
 
   height: 300px;
-  width: 320px;
+  width: 280px;
 }
 
 .animatedLogo {

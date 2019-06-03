@@ -97,9 +97,14 @@ export const Clip4Outline = ({ ...props }) => {
   );
 };
 
-const Clip4 = () => {
+const ClipDino = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 178.86 178.86">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 178.86 178.86"
+      xmlSpace="preserve"
+      content="application/xhtml+xml"
+    >
       <defs>
         <clipPath
           id="svgPath"
@@ -153,4 +158,4 @@ const Clip4 = () => {
   );
 };
 
-export default Clip4;
+export default ClipDino;

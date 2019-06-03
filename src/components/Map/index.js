@@ -19,7 +19,18 @@ export default ({ data, children }) => {
         <LeafletMap height={cardOffsetTop + 20} />
       </div>
 
-      {<div style={{ zIndex: 2, pointerEvents: "none" }}>{children}</div>}
+      {
+        <div
+          style={{
+            zIndex: 2,
+            pointerEvents: "none",
+            position: "absolute",
+            overflow: "hidden"
+          }}
+        >
+          {children}
+        </div>
+      }
     </div>
   );
 };
