@@ -10,7 +10,7 @@
   min-width: 300px;
 
   /* adjust the card height vs map height */
-  height: 50vh;
+  height: 55vh;
   overflow-y: scroll;
 
   width: calc(100% - 30px);

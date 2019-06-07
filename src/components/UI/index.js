@@ -26,7 +26,7 @@ const GREEN = "#3AB795";
 const YELLOW = "#FFC532";
 const GREY = "#BECEC6";
 
-const ExploreCard = () => {
+const ExploreCard = ({ active }) => {
   const appState = useContext(MainContext);
   const [width, setWidth] = useState(0);
   const handleResize = e => {
@@ -188,7 +188,7 @@ const ExploreCard = () => {
   );
 };
 
-const DiscoverCard = () => {
+const DiscoverCard = ({ active }) => {
   const [pred, setPred] = useState("");
   const [videoRef, setVideoRef] = useState();
   const [ready, setReady] = useState(false);
@@ -212,12 +212,6 @@ const DiscoverCard = () => {
     return (
       <img className={styles.animatedLogo} src="#" height={50} alt="find" />
     );
-  };
-
-  const animatedBorder = (px = 10) => {
-    if (ready && !triggerPrediction) return `${px}px solid ${GREEN}`;
-    else if (ready && triggerPrediction) return `${px}px solid ${YELLOW}`;
-    else return `${px}px solid ${GREY}`;
   };
 
   const animatedStrokeColor = () => {
@@ -250,13 +244,15 @@ const DiscoverCard = () => {
         // style={{ border: animatedBorder() }}
       >
         <SpeechBubble className={styles.speechBubble} text={bubbleText} />
-        <Camera
-          // onTakePhoto={onTakePhoto}
-          onClick={() => setTriggerPrediction(true)}
-          className={styles.camera}
-          onRef={setVideoRef}
-          strokeClr={animatedStrokeColor()}
-        />
+        {active && (
+          <Camera
+            // onTakePhoto={onTakePhoto}
+            onClick={() => setTriggerPrediction(true)}
+            className={styles.camera}
+            onRef={setVideoRef}
+            strokeClr={animatedStrokeColor()}
+          />
+        )}
         {/* <AnimatedLogo /> */}
       </div>
 
@@ -290,40 +286,33 @@ const UI = () => {
   const appState = useContext(MainContext);
   const [currentPage, setCurrentPage] = useState("main");
 
-  const handlePageTransition = () => {
-    // TODO: smooth slide out/in/fade transition
-  };
-
   // if there is a new search result, switch over to explore page
   useEffect(() => {
     if (appState.search) setCurrentPage(pages[0].value);
   }, [appState.search]);
 
-  if (currentPage === pages[0].value) {
-    return (
+  return (
+    <>
       <Card
+        active={currentPage === pages[0].value}
         onExit={() => setCurrentPage("main")}
         onOffsetTop={appState.setCardOffsetTop}
         blurOnButtonOnly
       >
-        <ExploreCard />
+        <ExploreCard active={currentPage === pages[0].value} />
       </Card>
-    );
-  } else if (currentPage === pages[1].value) {
-    return (
       <Card
+        active={currentPage === pages[1].value}
         onExit={() => setCurrentPage("main")}
         onOffsetTop={appState.setCardOffsetTop}
         overflow
       >
-        <DiscoverCard />
+        <DiscoverCard active={currentPage === pages[1].value} />
       </Card>
-    );
-  } else {
-    return <Buttons inputs={pages} onSubmit={e => setCurrentPage(e.value)} />;
-  }
 
-  return;
+      <Buttons inputs={pages} onSubmit={e => setCurrentPage(e.value)} />
+    </>
+  );
 };
 
 const CardLayer = () => {

@@ -154,19 +154,6 @@ const Predictor = ({
         setIsDetecting(false);
       }
 
-      // debug
-      //console.log("sorted predictions");
-      //console.log(predictions.slice(0, 10));
-      //console.log("reverse sorted predictions");
-      //console.log(predictions.slice(0, 10));
-
-      // let classes = predictions.map(
-      //   v => getClassNames([v.index])[0] + ` (${v.index + 1})`
-      // );
-      //console.log("top 5");
-      //console.log(classes.slice(0, 5));
-      //console.log("top 1");
-      //console.log(classes[0]);
       console.log("predictions: ", dinos.slice(0, 5));
     }
   };

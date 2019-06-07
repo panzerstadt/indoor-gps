@@ -17,11 +17,6 @@ const CardDiv = posed.div({
   }
 });
 
-// TODO: fix slow fade in
-// const CardDiv = posed.div({
-//   visible: { opacity: 1, marginBottom: 0 },
-//   hidden: { opacity: 0, marginBottom: -500 }
-// });
 const Card = ({
   text,
   onExit,
@@ -30,7 +25,8 @@ const Card = ({
   children,
   onOffsetTop,
   transparent,
-  overflow
+  overflow,
+  active
 }) => {
   const cardDivRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -89,6 +85,14 @@ const Card = ({
       cardDivRef &&
       cardDivRef.current.removeEventListener("scroll", updateOffsetTop);
   }, [cardDivRef]);
+
+  useEffect(() => {
+    if (active) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, [active]);
 
   return (
     <CardDiv
