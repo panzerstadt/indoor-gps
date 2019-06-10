@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { csv } from "d3-fetch";
 import axios from "axios";
 
+// require context as a babel macro (only works with cra2)
+import requireContext from "require-context.macro";
+
 // image assets folder path
 const dinoImgs = importAll(
-  require.context("../../assets/images", true, /.*\.jpg$/)
+  requireContext("../../assets/images", true, /.*\.jpg$/)
 );
 
 export function importAll(r) {

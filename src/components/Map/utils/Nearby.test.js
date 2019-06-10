@@ -1,8 +1,14 @@
 import { Nearby } from "./Nearby";
+import { map } from "rsvp";
 
 it("calculates the right nearby locations", () => {
-  expect(Nearby(input, comparisons)).toEqual([3, 2, 0, 1]);
-  expect(Nearby(inputList, comparisonList)).toEqual([3, 1, 0, 2]);
+  expect(Nearby(input, comparisons).map(v => v.index)).toEqual([3, 2, 0, 1]);
+  expect(Nearby(inputList, comparisonList).map(v => v.index)).toEqual([
+    3,
+    1,
+    0,
+    2
+  ]);
 });
 
 const input = {
