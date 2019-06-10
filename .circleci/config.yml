@@ -103,8 +103,8 @@ workflows:
       #     requires:
       #       - prepare
       - build:
-          requires:
-            - lint
+          # requires:
+          #   - lint
       - tu:
           requires:
             - build
