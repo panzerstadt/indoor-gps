@@ -36,14 +36,14 @@ jobs:
           root: .
           paths:
             - build
-  tu:
+  unit-test:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run: yarn test
-  e2e:
+  e2e-test:
     <<: *defaults
     steps:
       - checkout
@@ -64,8 +64,8 @@ jobs:
       - attach_workspace:
           at: .
       - add_ssh_keys:
-        fingerprints:
-          - "39:ab:97:32:6d:30:59:47:8f:54:fa:65:46:49:5e:ed"
+          fingerprints:
+            - "39:ab:97:32:6d:30:59:47:8f:54:fa:65:46:49:5e:ed"
       - deploy:
           name: Deploy to GitHub Pages
           command: |
@@ -93,24 +93,24 @@ workflows:
           requires:
             - prepare
             #- lint
-      - tu:
+      - unit-test:
           requires:
             - build
-      - e2e:
+      - e2e-test:
           requires:
             - build
       - deploy-github:
           requires:
-            - tu
-            - e2e
+            - unit-test
+            - e2e-test
           filters:
             branches:
               only: master
       - deploy-prod:
           type: approval
           requires:
-            - tu
-            - e2e
+            - unit-test
+            - e2e-test
 # - deploy:
 #         name: Deploy to GitHub Pages
 #           command: |
