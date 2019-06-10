@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "PUBLIC_URL=https://panzerstadt.github.io/indoor-gps/ yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages --message '[skip ci] Deployment' -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

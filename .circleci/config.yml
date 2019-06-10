@@ -78,7 +78,7 @@ jobs:
             fi
             git config --global user.email "$GH_EMAIL" > /dev/null 2>&1
             git config --global user.name "$GH_NAME" > /dev/null 2>&1
-            gh-pages --message "[skip ci] Deployment from $GH_EMAIL" -d build
+            yarn deploy
             echo "Finished GitHub pages Deployment!"
 
 workflows:
