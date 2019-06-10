@@ -63,7 +63,13 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+      - add_ssh_keys:
+        fingerprints:
+          - "39:ab:97:32:6d:30:59:47:8f:54:fa:65:46:49:5e:ed"
       - deploy:
+          filters:
+            branches:
+              only: master
           name: Deploy to GitHub Pages
           command: |
             set -e
@@ -75,7 +81,7 @@ jobs:
             fi
             git config --global user.email "$GH_EMAIL" > /dev/null 2>&1
             git config --global user.name "$GH_NAME" > /dev/null 2>&1
-            yarn deploy
+            gh-pages --message "[skip ci] Deployment from $GH_EMAIL" -d build
             echo "Finished GitHub pages Deployment!"
 
 workflows:
