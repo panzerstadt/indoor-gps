@@ -88,8 +88,10 @@ jobs:
             fi
             cp -a "../build/." .
             git add -A
+            echo "performing git push..."
             git commit --allow-empty -m "Deploy to GitHub pages [ci skip]"
             git push --force --quiet origin gh-pages > /dev/null 2>&1
+            echo "git push completed!"
             cd ..
             rm -rf gh-pages-branch
             echo "Finished GitHub pages Deployment!"
