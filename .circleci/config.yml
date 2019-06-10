@@ -16,7 +16,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-      - run: npm install
+      - run: yarn install
       - save_cache:
           paths:
             - node_modules
@@ -31,7 +31,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: npm run build
+      - run: yarn build
       - persist_to_workspace:
           root: .
           paths:
@@ -42,21 +42,21 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: npm run test
+      - run: yarn test
   e2e:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: npm run test
+      - run: yarn test
   lint:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: npm run lint
+      - run: yarn lint
   deploy-github:
     <<: *defaults
     steps:
