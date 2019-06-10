@@ -67,9 +67,6 @@ jobs:
         fingerprints:
           - "39:ab:97:32:6d:30:59:47:8f:54:fa:65:46:49:5e:ed"
       - deploy:
-          filters:
-            branches:
-              only: master
           name: Deploy to GitHub Pages
           command: |
             set -e
@@ -106,6 +103,9 @@ workflows:
           requires:
             - tu
             - e2e
+          filters:
+            branches:
+              only: master
       - deploy-prod:
           type: approval
           requires:
