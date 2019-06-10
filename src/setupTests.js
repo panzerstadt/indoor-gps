@@ -9,3 +9,4 @@ window.matchMedia =
   };
 
 require("fake-indexeddb/auto");
+require("jest-canvas-mock");

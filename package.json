@@ -42,7 +42,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "canvas-prebuilt": "1",
-    "fake-indexeddb": "^2.1.1"
+    "fake-indexeddb": "^2.1.1",
+    "jest-canvas-mock": "^2.1.0"
   }
 }
