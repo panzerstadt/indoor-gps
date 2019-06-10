@@ -103,9 +103,9 @@ workflows:
       #     requires:
       #       - prepare
       - build:
-        requires:
-          - prepare
-          #- lint
+          requires:
+            - prepare
+            #- lint
       - tu:
           requires:
             - build
