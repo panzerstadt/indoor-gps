@@ -59,6 +59,9 @@ jobs:
       - run: yarn lint
   deploy-github:
     <<: *defaults
+    environment:
+      GH_EMAIL: tliqun@gmail.com
+      GH_NAME: panzerstadt
     steps:
       - checkout
       - attach_workspace:
