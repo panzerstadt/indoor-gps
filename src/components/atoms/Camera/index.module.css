@@ -15,10 +15,19 @@
   /* border-radius: 999px; */
   overflow: hidden;
   transform: scaleX(-1);
+
   z-index: 1;
 
   /* clip path taken from CameraClipPath */
   clip-path: url(#svgPath);
+}
+
+.flip {
+}
+@media (max-width: 600px) {
+  .flip {
+    transform: scaleX(-1);
+  }
 }
 
 .cameraOutline {

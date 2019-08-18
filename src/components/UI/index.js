@@ -188,7 +188,7 @@ const ExploreCard = ({ active }) => {
   );
 };
 
-const DiscoverCard = ({ active }) => {
+export const DiscoverCard = ({ active }) => {
   const [pred, setPred] = useState("");
   const [videoRef, setVideoRef] = useState();
   const [ready, setReady] = useState(false);

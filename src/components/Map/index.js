@@ -16,7 +16,7 @@ export default ({ data, children }) => {
   return (
     <div className={styles.main}>
       <div className={styles.map}>
-        <LeafletMap height={cardOffsetTop + 20} />
+        <LeafletMap height={"100vh"} />
       </div>
 
       {

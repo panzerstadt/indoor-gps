@@ -38,9 +38,7 @@ const dataFetchReducer = (state, action) => {
 };
 
 export const useFetch = (initialUrl, initialData) => {
-  const [data, setData] = useState(initialData || null);
   const [url, setUrl] = useState(initialUrl);
-
   const [state, dispatch] = useReducer(dataFetchReducer, {
     // dataFetchReducer is the action
     // this here is the initial state

@@ -16,6 +16,8 @@ import IntroPage from "./components/Intro";
 import { useCsvData, useWiki, useMultipleWiki } from "./components/useHooks";
 import filepath from "./dataset/class_coords.csv";
 
+import { DiscoverCard } from "./components/UI";
+
 // contextAPI
 export const MainContext = React.createContext();
 

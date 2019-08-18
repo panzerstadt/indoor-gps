@@ -44,12 +44,14 @@ const WebcamComponent = ({ onRef, strokeClr, ...props }) => {
       <div className={styles.camera}>
         <ClipPath />
 
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          videoConstraints={VIDEO_CONSTRAINTS}
-          screenshotFormat="image/jpeg"
-        />
+        <div className={styles.flip}>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            videoConstraints={VIDEO_CONSTRAINTS}
+            screenshotFormat="image/jpeg"
+          />
+        </div>
       </div>
     </div>
   );

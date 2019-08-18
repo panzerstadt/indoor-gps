@@ -80,7 +80,7 @@ const Predictor = ({
           const allLines = s.split(/\r\n|\n/);
           return allLines.filter(v => v.length > 1);
         });
-      //console.log("classes: ", classes);
+      console.log("classes: ", classes);
 
       setPredictor(model);
       setClasses(classes);
@@ -103,6 +103,15 @@ const Predictor = ({
   const [guesses, setGuesses] = useState([]);
   const [topGuess, setTopGuess] = useState("");
   const appState = useContext(MainContext);
+
+  const getClassNames = indices => {
+    var outp = [];
+
+    indices.forEach((v, i) => (outp[i] = classes[indices[i] + 1]));
+    //for (var i = 0; i < indices.length; i++) outp[i] = classes[indices[i]];
+    return outp;
+  };
+
   const detect = async () => {
     if (videoRef) {
       let context;
@@ -117,15 +126,17 @@ const Predictor = ({
       const processed = preprocess(canvas);
       const pred = predictor.predict(processed).dataSync();
 
+      console.log("predictions: ", pred);
+
       let predictions = Object.values(pred).map((v, i) => {
         return { index: i, value: v };
       });
 
-      predictions = predictions.sort((x, y) =>
-        x.value > y.value ? 1 : x.value === y.value ? 0 : -1
-      );
+      console.log("predictions with value: ", predictions);
 
-      predictions = predictions.reverse();
+      predictions = predictions
+        .sort((x, y) => (x.value > y.value ? 1 : x.value === y.value ? 0 : -1))
+        .reverse();
 
       let dinos = predictions.map(v => ({
         label: getClassNames([v.index])[0],
@@ -135,6 +146,7 @@ const Predictor = ({
       const s = dinos[0].score;
 
       if (s > 0.5) {
+        console.log("dinos before slice:", dinos);
         const top5 = dinos.slice(0, 5).map(v => v.label);
         const top = dinos[0].label;
 
@@ -143,18 +155,19 @@ const Predictor = ({
         setTopGuess(top);
 
         // send to parent
-        if (onSuccess) onSuccess(top);
+        onSuccess && onSuccess(top);
+
+        console.log("top5: ", top5);
+        console.log("top: ", top);
 
         // send to context
         setTimeout(() => {
-          appState.setSearch(top);
+          appState && appState.setSearch(top);
         }, 1000);
 
         // end detection loop
         setIsDetecting(false);
       }
-
-      console.log("predictions: ", dinos.slice(0, 5));
     }
   };
   useEffect(() => {
@@ -163,17 +176,11 @@ const Predictor = ({
     }
   }, [onTrigger]);
 
-  const getClassNames = indices => {
-    var outp = [];
-    for (var i = 0; i < indices.length; i++) outp[i] = classes[indices[i]];
-    return outp;
-  };
-
-  const readyStateClr = () => {
-    if (progress === 1 && isDetecting) return "red";
-    else if (progress === 1 && !isDetecting) return "#efefef";
-    else return "grey";
-  };
+  // const readyStateClr = () => {
+  //   if (progress === 1 && isDetecting) return "red";
+  //   else if (progress === 1 && !isDetecting) return "#efefef";
+  //   else return "grey";
+  // };
 
   return (
     <div style={{ width: "100%" }}>
