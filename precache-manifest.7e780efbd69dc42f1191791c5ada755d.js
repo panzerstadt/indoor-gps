@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00031_.af7d6463.jpg"
   },
   {
-    "revision": "9147e97e82035253c767",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/css/main.244b660c.chunk.css"
+    "revision": "6d622ff1b3bfbd3ad915",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/css/main.85dc7274.chunk.css"
   },
   {
     "revision": "30bddb70ddee4b453e3f21a743f73c7b",
@@ -172,8 +172,8 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00026_.7fbfbe4d.jpg"
   },
   {
-    "revision": "9147e97e82035253c767",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/js/main.9147e97e.chunk.js"
+    "revision": "6d622ff1b3bfbd3ad915",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/js/main.6d622ff1.chunk.js"
   },
   {
     "revision": "1889eaac0a572e38441aaf1577587c72",
@@ -312,6 +312,10 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/00076_.b2a6d8f2.jpg"
   },
   {
+    "revision": "ced611daf7709cc778da928fec876475",
+    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.ced611da.eot"
+  },
+  {
     "revision": "f97e3bbf73254b0112091d0192f17aec",
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.f97e3bbf.svg"
   },
@@ -322,10 +326,6 @@ self.__precacheManifest = [
   {
     "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
     "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.b7c9e1e4.woff"
-  },
-  {
-    "revision": "ced611daf7709cc778da928fec876475",
-    "url": "https://panzerstadt.github.io/indoor-gps/static/media/slick.ced611da.eot"
   },
   {
     "revision": "69cd1e2f0ff685b77ff788d068cded13",
@@ -344,7 +344,7 @@ self.__precacheManifest = [
     "url": "https://panzerstadt.github.io/indoor-gps/static/css/1.02721293.chunk.css"
   },
   {
-    "revision": "b5c7662ac33cf982aec740e004ce1872",
+    "revision": "b48313758562c80ff785ec14250d7aa7",
     "url": "https://panzerstadt.github.io/indoor-gps/index.html"
   }
 ];
